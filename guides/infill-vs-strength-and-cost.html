@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infill: Strength Versus Cost &mdash; What Changing It Really Buys</title>
+<meta name="description" content="Infill percentage and stiffness are not proportional. Walls do more than infill, and above 50% you are mostly buying mass. With a cost table for 10% to 100%.">
+<link rel="canonical" href="https://filamentcostcalculator.com/guides/infill-vs-strength-and-cost">
+<meta property="og:title" content="Infill: Strength Versus Cost &mdash; What Changing It Really Buys">
+<meta property="og:description" content="Infill percentage and stiffness are not proportional. Walls do more than infill, and above 50% you are mostly buying mass. With a cost table for 10% to 100%.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/guides/infill-vs-strength-and-cost">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-guides.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://filamentcostcalculator.com/guides"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Infill: strength versus cost",
+   "item": "https://filamentcostcalculator.com/guides/infill-vs-strength-and-cost"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Infill: strength versus cost",
+ "description": "Infill percentage and stiffness are not proportional. Walls do more than infill, and above 50% you are mostly buying mass. With a cost table for 10% to 100%.",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://filamentcostcalculator.com/guides/infill-vs-strength-and-cost"
+ },
+ "datePublished": "2026-10-12",
+ "dateModified": "2026-10-12",
+ "author": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How much does infill percentage affect strength?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It affects stiffness on a curve that flattens quickly. Going from hollow to 15% makes a large difference; going from 50% to 100% makes a small one at roughly triple the material. Between 15% and 30% is where most functional parts sit."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do walls or infill matter more for strength?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Walls, generally. Material at the outer surface resists bending more effectively than the same material in the middle, so adding a perimeter usually stiffens a part more cheaply than raising infill. On a part that flexes, try an extra wall before you touch the infill percentage."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is 100% infill stronger than 50%?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, but not proportionally, and it costs roughly double the material and a substantial amount of extra time. For most parts 100% infill is buying mass rather than stiffness. It is appropriate for parts that need to be solid, not for parts that need to be stiff."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which infill pattern is strongest?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Gyroid is a good default for functional parts: it is close to isotropic, prints without the self-crossing that grid produces, and takes compression well. Cubic and triangle patterns are stronger vertically but use more material for the same stiffness."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides">Guides</a><span>/</span>Infill: strength versus cost</p>
+    <h1>Infill: strength versus cost</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Infill and stiffness are related on a curve that flattens fast, and walls do more work than infill. This is when raising the percentage actually buys something, and what it costs when it does not.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#stiffness-versus-infill-on-a-curve-that-flattens-fast">Stiffness versus infill, on a curve that flattens fast</a></li>
+        <li><a href="#walls-do-more-work-than-infill">Walls do more work than infill</a></li>
+        <li><a href="#what-the-numbers-look-like">What the numbers look like</a></li>
+        <li><a href="#patterns-matter-as-much-as-percentage">Patterns matter as much as percentage</a></li>
+        <li><a href="#how-to-decide-without-guessing">How to decide without guessing</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="stiffness-versus-infill-on-a-curve-that-flattens-fast">Stiffness versus infill, on a curve that flattens fast</h2>
+<p>Infill percentage and stiffness are related, but not in a straight line, and the shape of that curve is the whole argument for printing at 15% instead of 60%.</p>
+<p>Going from a hollow part to a small amount of internal structure makes a large difference to how rigid a part feels. Going from already-dense to fully solid makes a difference most people cannot detect by hand, at roughly triple the material and a large increase in time.</p>
+<p>The practical version: below about 15% the part feels weak and flexible. Between 15% and 30% is where most functional parts belong. Above 50% you are mostly buying mass.</p>
+
+          <h2 id="walls-do-more-work-than-infill">Walls do more work than infill</h2>
+<p>The cheapest way to make a part stiffer is not infill at all &mdash; it is perimeters. Wall thickness contributes disproportionately to bending stiffness, because material at the outer surface resists bending more effectively than the same material in the middle. This is the same reason a hollow tube is stiffer than a solid rod of the same weight.</p>
+<p>Raising wall count from two to four often does more for a functional part than raising infill from 20% to 60%, and it costs considerably less material and time. If you are only going to change one setting on a part that flexes, change the walls.</p>
+
+          <h2 id="what-the-numbers-look-like">What the numbers look like</h2>
+<p>A 180 g model at 100% infill, with a quarter of that weight in walls and skins, a spool at $0.022 per gram, and machine time at $0.20/h:</p>
+<table class="data-table">
+  <tr><th>Infill</th><th class="num">Filament</th><th class="num">Material cost</th><th class="num">Approx. time</th><th class="num">Machine cost</th><th class="num">Total</th></tr>
+  <tr><td>10%</td><td class="num">58.5 g</td><td class="num">$1.29</td><td class="num">5.4 h</td><td class="num">$1.08</td><td class="num">$2.37</td></tr>
+  <tr><td>20%</td><td class="num">72 g</td><td class="num">$1.58</td><td class="num">6.0 h</td><td class="num">$1.20</td><td class="num">$2.78</td></tr>
+  <tr><td>40%</td><td class="num">99 g</td><td class="num">$2.18</td><td class="num">7.4 h</td><td class="num">$1.48</td><td class="num">$3.66</td></tr>
+  <tr><td>70%</td><td class="num">139.5 g</td><td class="num">$3.07</td><td class="num">9.6 h</td><td class="num">$1.92</td><td class="num">$4.99</td></tr>
+  <tr><td>100%</td><td class="num">180 g</td><td class="num">$3.96</td><td class="num">11.8 h</td><td class="num">$2.36</td><td class="num">$6.32</td></tr>
+</table>
+<p>Read the two ends together: moving from 10% to 100% multiplies material by 3.1 and total cost by 2.7, for a stiffness change that is dramatic at the bottom of the range and barely perceptible at the top. Print times are indicative and depend on your profile &mdash; use the <a href="/infill-cost-calculator">infill cost calculator</a> with your own slicer times.</p>
+
+          <h2 id="patterns-matter-as-much-as-percentage">Patterns matter as much as percentage</h2>
+<p>Two prints at the same infill percentage are not the same print. The main patterns behave differently under load:</p>
+<ul>
+<li><strong>Grid and lines.</strong> Fastest to print, weakest in shear, and grid crossings can cause nozzle bumps.</li>
+<li><strong>Gyroid.</strong> Isotropic in all three directions, printable without crossings, and good at absorbing compression. Usually the best default for functional parts.</li>
+<li><strong>Cubic and triangle.</strong> Strong in the vertical direction, more material per unit of stiffness than gyroid.</li>
+<li><strong>Concentric.</strong> Follows the shape, fast, poor in any direction other than in-plane.</li>
+</ul>
+<p>If you are tuning a functional part, gyroid at 20&ndash;25% with an extra perimeter usually beats grid at 40% on stiffness, material and time simultaneously.</p>
+
+          <h2 id="how-to-decide-without-guessing">How to decide without guessing</h2>
+<p>A repeatable procedure that takes one afternoon and settles the question for a whole product line:</p>
+<ol>
+<li>Print the part at your current settings and test it the way the customer will.</li>
+<li>Keep the infill and add one perimeter. Test again.</li>
+<li>If it is good enough, stop &mdash; you have just made the part cheaper.</li>
+<li>If not, raise infill by 10 points and test again. Repeat once.</li>
+<li>When it passes, record the settings next to the cost from the calculator so the next quote for that part is not a guess.</li>
+</ol>
+<p>The point of the sequence is that you spend material only where testing says you need to, instead of building in a safety margin you cannot measure.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The filament figures here use a simple approximation: the model's weight at 100% infill, multiplied by the shell share plus the remaining share scaled by the infill percentage. Real slicers add supports, brim and purge, and the solid share varies with wall count and geometry.</p>
+<p>Print times are indicative. Use your own slicer's times in the calculator rather than these, because time estimates vary substantially between machines and profiles.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How much does infill percentage affect strength?</summary><p>It affects stiffness on a curve that flattens quickly. Going from hollow to 15% makes a large difference; going from 50% to 100% makes a small one at roughly triple the material. Between 15% and 30% is where most functional parts sit.</p></details><details><summary>Do walls or infill matter more for strength?</summary><p>Walls, generally. Material at the outer surface resists bending more effectively than the same material in the middle, so adding a perimeter usually stiffens a part more cheaply than raising infill. On a part that flexes, try an extra wall before you touch the infill percentage.</p></details><details><summary>Is 100% infill stronger than 50%?</summary><p>Yes, but not proportionally, and it costs roughly double the material and a substantial amount of extra time. For most parts 100% infill is buying mass rather than stiffness. It is appropriate for parts that need to be solid, not for parts that need to be stiff.</p></details><details><summary>Which infill pattern is strongest?</summary><p>Gyroid is a good default for functional parts: it is close to isotropic, prints without the self-crossing that grid produces, and takes compression well. Cubic and triangle patterns are stronger vertically but use more material for the same stiffness.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Compare two infill settings</h3>
+            <p>Put your own slicer times in and see what the change costs before you commit to a long print.</p>
+            <a class="btn btn-dark" href="/infill-cost-calculator">Compare two infill settings</a>
+          </div>
+          <div class="side-card">
+            <h3>More guides</h3>
+            <ul>
+              <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li><li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li><li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li><li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li><li><a href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <p class="note">This guide is explanatory, not financial advice. Costs and times shown are illustrative examples, not measured averages.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

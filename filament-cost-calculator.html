@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Filament Cost Calculator — Cost Per Print &amp; Per Gram (Free)</title>
+<meta name="description" content="Work out what the plastic in one 3D print costs: cost per part, cost per gram, cost per kilogram and how many prints are left on the spool.">
+<link rel="canonical" href="https://filamentcostcalculator.com/filament-cost-calculator">
+<meta property="og:title" content="Filament Cost Calculator — Cost Per Print &amp; Per Gram">
+<meta property="og:description" content="Cost per part, cost per gram and how many prints are left on the spool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://filamentcostcalculator.com/filament-cost-calculator">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-filament-cost.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How much does filament cost per gram?","acceptedAnswer":{"@type":"Answer","text":"Divide the price you paid for the spool by its net weight. A $22 spool with 1000 g of usable filament costs about $0.022 per gram. The number changes a lot between brands and materials, so use your own receipt rather than a generic average."}},
+{"@type":"Question","name":"Why is my print heavier than the slicer estimate?","acceptedAnswer":{"@type":"Answer","text":"Slicer estimates usually exclude supports, brims, purge lines and failed starts. If you add a 10–20% waste allowance you will land much closer to what the spool actually loses."}},
+{"@type":"Question","name":"Should I count the spool and packaging weight?","acceptedAnswer":{"@type":"Answer","text":"No. Use the net filament weight printed on the spool (usually 1000 g, 750 g or 500 g). The empty spool and box are not printed material."}},
+{"@type":"Question","name":"Is filament the biggest cost of a 3D print?","acceptedAnswer":{"@type":"Answer","text":"For small parts, yes. For long prints, electricity and machine time often exceed the material cost. This calculator covers material only — use the print cost calculator for machine time and power."}},
+{"@type":"Question","name":"How do I price a 3D printed item for sale?","acceptedAnswer":{"@type":"Answer","text":"Material cost is only the first layer. Add machine time, power, failed prints, packaging, platform fees and your own labour before you set a retail price."}},
+{"@type":"Question","name":"Does the calculator include failed prints?","acceptedAnswer":{"@type":"Answer","text":"Only if you enter a waste percentage. A 10–15% allowance is a reasonable starting point for a printer that is dialled in; raise it while you are still tuning profiles."}}
+]}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Calculators",
+   "item": "https://filamentcostcalculator.com/3d-printing-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Filament Cost Calculator"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Filament Cost Calculator",
+ "url": "https://filamentcostcalculator.com/filament-cost-calculator",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in the browser)",
+ "browserRequirements": "Requires JavaScript",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/3d-printing-calculators">Calculators</a><span>/</span>Filament Cost Calculator</p>
+    <h1>Filament Cost Calculator</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:760px">Work out what the plastic in one print costs you: cost per part, cost per gram, cost per kilogram, and how many more prints fit on the spool. Enter your own spool price and model weight &mdash; nothing is uploaded and nothing is stored.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+
+    <div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Your spool and your model</h2>
+            <p>Enter the numbers from your own receipt and slicer. Nothing is sent anywhere.</p>
+          </div>
+          <span class="live-badge">Calculates instantly</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="spoolPrice">Price paid for the spool</label>
+            <div class="input-wrap">
+              <input id="spoolPrice" type="number" min="0" step="0.01" value="22">
+              <span class="input-unit">USD</span>
+            </div>
+            <small>Include tax and shipping if you want the true landed cost.</small>
+          </div>
+
+          <div class="field">
+            <label for="netWeight">Filament on the spool</label>
+            <div class="input-wrap">
+              <input id="netWeight" type="number" min="1" step="1" value="1000">
+              <span class="input-unit">g</span>
+            </div>
+            <small>Net weight, not the shipping weight of the box.</small>
+          </div>
+
+          <div class="field">
+            <label for="partWeight">Filament used per print</label>
+            <div class="input-wrap">
+              <input id="partWeight" type="number" min="0" step="0.1" value="45">
+              <span class="input-unit">g</span>
+            </div>
+            <small>Take this from your slicer's material estimate.</small>
+          </div>
+
+          <div class="field">
+            <label for="waste">Waste allowance</label>
+            <div class="input-wrap">
+              <input id="waste" type="number" min="0" max="80" step="1" value="12">
+              <span class="input-unit">%</span>
+            </div>
+            <small>Failed prints, purge, supports, brim.</small>
+          </div>
+
+          <div class="field">
+            <label for="qty">How many prints</label>
+            <div class="input-wrap">
+              <input id="qty" type="number" min="1" step="1" value="1">
+              <span class="input-unit">pcs</span>
+            </div>
+            <small>Useful for batch jobs and small runs.</small>
+          </div>
+
+          <div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="€">EUR / €</option>
+                <option value="£">GBP / £</option>
+                <option value="¥">CNY / ¥</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">▾</span>
+            </div>
+            <small>The maths is currency-neutral; this only changes the symbol.</small>
+          </div>
+        </div>
+
+        <div class="calc-actions">
+          <button class="btn btn-primary" type="button" onclick="calculate()">Calculate filament cost</button>
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset</button>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+
+      <div class="calc-card result-card">
+        <div class="result-kicker">Cost per print</div>
+        <div class="result-main">
+          <span>Filament only, waste included</span>
+          <strong id="perPart">$1.11</strong>
+        </div>
+        <div class="result-sub" id="perPartSub">45 g of 1000 g spool</div>
+
+        <div class="result-grid">
+          <div class="metric"><span>Cost per gram</span><strong id="perGram">$0.022</strong></div>
+          <div class="metric"><span>Cost per kg</span><strong id="perKg">$22.00</strong></div>
+          <div class="metric"><span>Prints left on spool</span><strong id="perSpool">19</strong></div>
+          <div class="metric"><span>Total for batch</span><strong id="batch">$1.11</strong></div>
+        </div>
+
+        <div class="result-note" id="note">This is material cost only. Machine time, power, packaging and platform fees are separate.</div>
+
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#how-filament-cost-actually-stacks-up">How filament cost actually stacks up</a></li>
+        <li><a href="#what-is-included-and-what-is-not">What is included, and what is not</a></li>
+        <li><a href="#the-calculation">The calculation</a></li>
+        <li><a href="#worked-examples">Worked examples</a></li>
+        <li><a href="#five-mistakes-that-inflate-or-hide-filament-cost">Five mistakes that inflate or hide filament cost</a></li>
+        <li><a href="#how-to-use-the-result">How to use the result</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+        <li><a href="#questions">Questions</a></li>
+      </ol></nav>
+
+        <h2 id="what-this-filament-cost-calculator-does">What this filament cost calculator does</h2>
+          <p>It answers one question: <strong>how much does the plastic in this print actually cost me?</strong> Not the printer, not the electricity — just the filament. You give it the price you paid for a spool, the net weight of that spool, the grams your slicer says the model needs, and an allowance for the filament you lose along the way. It returns the cost per part, the cost per gram, the cost per kilogram, how many more prints fit on the spool, and the total for a batch.</p>
+          <p>This is the first number anyone selling prints needs, and the one most people guess at. Guessing low is how people end up selling a 60 g model for $2 and calling the remainder profit.</p>
+
+          <figure class="photo-figure prose-photo">
+            <img src="/assets/spool-green.jpg" alt="A one kilogram reel of unused PLA filament" width="1280" height="1280" decoding="async">
+            <figcaption>A sealed 1 kg reel. What matters is not the sticker price but that price divided by the grams actually wound on, minus the tail your extruder will never reach.
+            
+        <span class="credit">Photo: Tatár Lehel, Wikimedia Commons, CC BY-SA 4.0</span></figcaption>
+          </figure>
+
+          <h2 id="how-filament-cost-actually-stacks-up">How filament cost actually stacks up</h2>
+          <p>The sticker price on the spool is not your cost per gram. Three things move the real number:</p>
+          <ul>
+            <li><strong>Landing cost.</strong> Shipping and tax belong in the spool price. A $19 spool with $6 shipping is a $25 spool.</li>
+            <li><strong>Net vs gross weight.</strong> A "1 kg spool" holds 1000 g of filament at most, and sometimes less. Cheap spools are frequently short-filled. Trust the net figure, and if you have a kitchen scale, weigh a full spool once — it is the cheapest audit you will ever run.</li>
+            <li><strong>Filament that never becomes your part.</strong> Purge lines, brims, supports, a failed first layer you restart, the tail left on the spool that your extruder cannot reach. On a well-tuned printer that is 8–15%. While you are still dialling in a new material it is easily double that.</li>
+          </ul>
+          <p>That last category is why slicer estimates and reality disagree. The slicer tells you what the part needs; the spool tells you what it lost.</p>
+
+          <h2 id="what-is-included-and-what-is-not">What is included, and what is not</h2>
+          <p>Being precise about the boundaries keeps this honest.</p>
+          <p><strong>Included:</strong> spool purchase price, net filament weight, model weight, a waste allowance you control, and quantity.</p>
+          <p><strong>Not included:</strong> electricity, printer depreciation, nozzle and bed wear, machine time, your labour, packaging, post-processing, filament drying, failed prints beyond the waste percentage you chose, and selling fees. Those belong in the full print cost and pricing calculators.</p>
+
+          <h2 id="the-calculation">The calculation</h2>
+          <div class="formula">cost per gram = spool price ÷ net weight (g)<br>effective grams = model weight × (1 + waste ÷ 100)<br>cost per part = effective grams × cost per gram<br>prints per spool = net weight ÷ effective grams (rounded down)</div>
+          <p>Everything follows from those four lines. If you want a different answer, change an input rather than the formula — the assumptions are yours to set.</p>
+
+          <h2 id="worked-examples">Worked examples</h2>
+          <p>A $22 PLA spool at 1000 g is $0.022 per gram. With a 12% waste allowance, here is what different model sizes cost:</p>
+          <div class="example-list">
+            <div class="example-row"><span>Keychain, 8 g model (9.0 g effective)</span><strong>$0.20</strong></div>
+            <div class="example-row"><span>Phone stand, 45 g model (50.4 g effective)</span><strong>$1.11</strong></div>
+            <div class="example-row"><span>Plant pot, 120 g model (134.4 g effective)</span><strong>$2.96</strong></div>
+            <div class="example-row"><span>Large vase, 300 g model (336 g effective)</span><strong>$7.39</strong></div>
+          </div>
+          <p>Now the same models on a $32 PETG spool at 1000 g, which is $0.032 per gram: $0.29, $1.61, $4.30 and $10.75. Same geometry, roughly 45% more material cost — because PETG costs more per kilo, not because it prints differently.</p>
+
+          <h2 id="five-mistakes-that-inflate-or-hide-filament-cost">Five mistakes that inflate or hide filament cost</h2>
+          <ol>
+            <li><strong>Using the gross shipping weight.</strong> A 1 kg spool arrives in a 1.35 kg parcel. Dividing price by 1350 g understates your cost per gram by a third.</li>
+            <li><strong>Forgetting the tail.</strong> The last 20–40 g on a spool often jams, snaps or gets tangled. Counting it as usable capacity makes your "prints per spool" number optimistic.</li>
+            <li><strong>Setting waste to zero.</strong> It is a nice feeling and a bad number. Even a dialled-in printer purges and brims.</li>
+            <li><strong>Mixing currencies inside one spool.</strong> If you bought in CNY and sell in USD, convert the spool price first, not the result.</li>
+            <li><strong>Treating filament cost as total cost.</strong> On a 12-hour print, electricity and machine wear commonly outweigh a small material charge. This tool answers one question only.</li>
+          </ol>
+
+          <h2 id="how-to-use-the-result">How to use the result</h2>
+          <ul>
+            <li><strong>Compare spools properly.</strong> Two brands at a similar price are not equivalent if one is short-filled. Cost per gram is the only fair comparison.</li>
+            <li><strong>Feed it into pricing.</strong> Take the cost per part, add machine time and power, then apply your margin. Never price from the sticker price of the spool.</li>
+            <li><strong>Sense-check a batch quote.</strong> Multiply cost per part by quantity before you agree to print fifty of something for a fixed fee.</li>
+          </ul>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+          <p>The default values in this calculator — a $22 spool, 1000 g, 45 g per print, 12% waste — are <strong>starting assumptions, not market figures.</strong> Filament prices vary by country, material and brand, and they move. Replace every default with the numbers from your own receipt and your own slicer. The calculator multiplies and divides; it does not know your spool, your printer or your failed prints.</p>
+
+          <div class="faq">
+            <h2 id="questions">Questions</h2>
+            <details open><summary>How much does filament cost per gram?</summary><p>Divide the price you paid for the spool by its net weight. A $22 spool with 1000 g of usable filament costs about $0.022 per gram. The number changes a lot between brands and materials, so use your own receipt rather than a generic average.</p></details>
+            <details><summary>Why is my print heavier than the slicer estimate?</summary><p>Slicer estimates usually exclude supports, brims, purge lines and failed starts. If you add a 10–20% waste allowance you will land much closer to what the spool actually loses.</p></details>
+            <details><summary>Should I count the spool and packaging weight?</summary><p>No. Use the net filament weight printed on the spool (usually 1000 g, 750 g or 500 g). The empty spool and box are not printed material.</p></details>
+            <details><summary>Is filament the biggest cost of a 3D print?</summary><p>For small parts, yes. For long prints, electricity and machine time often exceed the material cost. This calculator covers material only — use the print cost calculator for machine time and power.</p></details>
+            <details><summary>How do I price a 3D printed item for sale?</summary><p>Material cost is only the first layer. Add machine time, power, failed prints, packaging, platform fees and your own labour before you set a retail price.</p></details>
+            <details><summary>Does the calculator include failed prints?</summary><p>Only if you enter a waste percentage. A 10–15% allowance is a reasonable starting point for a printer that is dialled in; raise it while you are still tuning profiles.</p></details>
+          </div>
+        </div>
+
+        <aside class="side-col">
+          <div class="pro-cta">
+            <span class="eyebrow">Next step</span>
+            <h3>Filament is only part of the cost</h3>
+            <p>Add machine time, power and failure rate before you quote a price to anyone.</p>
+            <a class="btn btn-dark" href="/3d-print-cost-calculator">Open print cost calculator</a>
+          </div>
+          <div class="card">
+            <h3>Related calculators</h3>
+            <ul class="list-check">
+              <li><a class="text-link" href="/spool-remaining-calculator">Spool remaining</a> — grams left on a part-used spool</li>
+              <li><a class="text-link" href="/print-time-cost-calculator">Print time &amp; power</a> — what the hours cost</li>
+              <li><a class="text-link" href="/infill-cost-calculator">Infill vs cost</a> — what infill % really changes</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Read next</h3>
+            <ul class="list-check">
+              <li><a class="text-link" href="/guides/filament-cost-per-gram">How to work out cost per gram</a></li>
+              <li><a class="text-link" href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+            </ul>
+          </div>
+          <figure class="photo-figure">
+            <img src="/assets/caliper.jpg" alt="A digital caliper measuring the wall thickness of a part" width="1280" height="960" decoding="async">
+            <figcaption>Cheap calipers and a kitchen scale will improve your costing more than any spreadsheet formula.
+            
+        <span class="credit">Photo: Simon A. Eugster, Wikimedia Commons, CC BY-SA 4.0</span></figcaption>
+          </figure>
+          <p class="note">This page is a calculator, not a quote. Defaults are assumptions — always check your own receipts.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v;}
+function sym(){return document.getElementById('currency').value;}
+function money(v,s){v=v||0;var a=Math.abs(v);if(!isFinite(a))return '\u2014';if(a>=1e9)return (v<0?'-':'')+s+a.toExponential(2);var d=(a===0)?2:(a<0.1?3:2);var p=a.toFixed(d).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return (v<0?'-':'')+s+p.join('.');}
+function calculate(){
+  var err=document.getElementById('err'), note=document.getElementById('note');
+  err.textContent='';
+  note.className='result-note';
+  var p=num('spoolPrice'), w=num('netWeight'), part=num('partWeight'), waste=num('waste'), qty=num('qty');
+  if(p===null||p<0){err.textContent='Enter a spool price of 0 or more.';return;}
+  if(w===null||w<=0){err.textContent='Enter the net filament weight in grams (for example 1000).';return;}
+  if(part===null||part<0){err.textContent='Enter the filament used per print in grams.';return;}
+  if(waste===null||waste<0){waste=0;}
+  if(qty===null||qty<1){qty=1;document.getElementById('qty').value=1;}
+  var s=sym();
+  var perGram=p/w;
+  var eff=part*(1+waste/100);
+  var perPart=eff*perGram;
+  document.getElementById('perPart').textContent=money(perPart,s);
+  document.getElementById('perPartSub').textContent=part+' g model, '+eff.toFixed(1)+' g with waste';
+  document.getElementById('perGram').textContent=money(perGram,s);
+  document.getElementById('perKg').textContent=money(perGram*1000,s);
+  var sp=Math.floor(w/eff);
+  document.getElementById('perSpool').textContent=sp;
+  document.getElementById('batch').textContent=money(perPart*qty,s);
+  if(part>w){
+    note.className='result-note';
+    note.textContent='Careful: one print uses more filament than the whole spool. Check the model weight and the spool weight.';
+  } else if(sp<3){
+    note.textContent='Only about '+sp+' print(s) fit on this spool. Order more before you take batch work on.';
+  } else {
+    note.textContent='Material cost only. Machine time, power, packaging and selling fees are additional.';
+  }
+}
+function copyResult(){
+  var s=sym();
+  var t='Filament cost: '+document.getElementById('perPart').textContent+' per print ('+document.getElementById('perGram').textContent+'/g)';
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  document.getElementById('spoolPrice').value=22;
+  document.getElementById('netWeight').value=1000;
+  document.getElementById('partWeight').value=45;
+  document.getElementById('waste').value=12;
+  document.getElementById('qty').value=1;
+  document.getElementById('currency').value='$';
+  document.getElementById('err').textContent='';
+  calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  ['spoolPrice','netWeight','partWeight','waste','qty'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',calculate);
+  });
+  document.getElementById('currency').addEventListener('change',calculate);
+  calculate();
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

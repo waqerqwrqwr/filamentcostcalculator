@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Print Pricing Calculator &mdash; Cost to Retail Price With Fees</title>
+<meta name="description" content="Turn a production cost into a price that survives platform and payment fees. Get the list price, the fees taken, your profit and the break-even price.">
+<link rel="canonical" href="https://filamentcostcalculator.com/3d-print-pricing-calculator">
+<meta property="og:title" content="3D Print Pricing Calculator &mdash; Cost to Retail Price With Fees">
+<meta property="og:description" content="Turn a production cost into a price that survives platform and payment fees. Get the list price, the fees taken, your profit and the break-even price.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/3d-print-pricing-calculator">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-pricing.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Calculators",
+   "item": "https://filamentcostcalculator.com/3d-printing-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "3D Print Pricing Calculator",
+   "item": "https://filamentcostcalculator.com/3d-print-pricing-calculator"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "3D Print Pricing Calculator",
+ "url": "https://filamentcostcalculator.com/3d-print-pricing-calculator",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in the browser)",
+ "browserRequirements": "Requires JavaScript",
+ "description": "Turn a production cost into a price that survives platform and payment fees. Get the list price, the fees taken, your profit and the break-even price.",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I price a 3D print for sale?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Work out the full cost first, then gross up for the fees. If a part costs $3.84 to produce and you want a 30% margin with 10% total fees, the list price is $3.84 times 1.30 divided by 0.90, which is $5.55. Adding 30% to the cost and stopping there gives you $4.99 and an actual margin nearer 17%."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is my profit lower than my margin suggests?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because selling fees are charged on the price, not on your cost. A 30% margin and a 10% total fee are not additive: the fee comes out of the price you set, so the price has to be higher than cost plus margin to leave the margin intact."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I charge shipping separately or include it?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Charging it separately keeps your item price honest and removes postage from your costing. If you offer free shipping, remember that the platform commission is then charged on the postage you folded into the price, so you have to inflate by slightly more than the postage itself."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a break-even price?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The price at which you make exactly nothing: your landed cost grossed up for fees. For a $3.84 part with 10% total fees it is $4.27. Below that number you are paying the marketplace for the privilege of working."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/3d-printing-calculators">Calculators</a><span>/</span>3D Print Pricing Calculator</p>
+    <h1>3D Print Pricing Calculator</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Turn a production cost into a price that survives selling fees. Enter what the part costs you, what postage really costs, and the rates your platform charges &mdash; you get a list price, the fees taken, the profit left and the price at which you would make nothing.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Cost, postage and fees</h2>
+            <p>Gross the fees up instead of adding them on. Nothing is sent anywhere.</p>
+          </div>
+          <span class="live-badge">Calculates as you type</span>
+        </div>
+        <div class="field-grid"><div class="field">
+            <label for="costPerPart">Cost to produce one part</label>
+            <div class="input-wrap"><input id="costPerPart" type="number" min="0" step="0.01" value="3.84"><span class="input-unit">USD</span></div>
+            <small>From the print cost calculator, or your own figure.</small>
+          </div><div class="field">
+            <label for="shippingCost">Postage you pay</label>
+            <div class="input-wrap"><input id="shippingCost" type="number" min="0" step="0.01" value="2.50"><span class="input-unit">USD</span></div>
+            <small>Envelope, label, actual postage.</small>
+          </div><div class="field">
+            <label for="shippingCharged">Postage you charge</label>
+            <div class="input-wrap"><input id="shippingCharged" type="number" min="0" step="0.01" value="2.50"><span class="input-unit">USD</span></div>
+            <small>What the buyer pays towards it.</small>
+          </div><div class="field">
+            <label for="margin">Margin you want</label>
+            <div class="input-wrap"><input id="margin" type="number" min="0" step="1" value="30"><span class="input-unit">%</span></div>
+            <small>On top of your landed cost, before fees.</small>
+          </div><div class="field">
+            <label for="feePct">Platform fee</label>
+            <div class="input-wrap"><input id="feePct" type="number" min="0" step="0.1" max="60" value="6.5"><span class="input-unit">%</span></div>
+            <small>Marketplace commission on the sale price.</small>
+          </div><div class="field">
+            <label for="payPct">Payment fee</label>
+            <div class="input-wrap"><input id="payPct" type="number" min="0" step="0.1" max="30" value="3.5"><span class="input-unit">%</span></div>
+            <small>Card or processor fee, charged on the sale price.</small>
+          </div><div class="field">
+            <label for="qty">How many you are selling</label>
+            <div class="input-wrap"><input id="qty" type="number" min="1" step="1" value="1"><span class="input-unit">pcs</span></div>
+            <small>For a batch or a wholesale quote.</small>
+          </div><div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="&euro;">EUR / &euro;</option>
+                <option value="&pound;">GBP / &pound;</option>
+                <option value="&yen;">CNY / &yen;</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">&#9662;</span>
+            </div>
+            <small>The maths is currency-neutral.</small>
+          </div></div>
+        <div class="calc-actions">
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset to defaults</button>
+          <a class="btn btn-primary" href="/3d-print-cost-calculator">Get the production cost first</a>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+<div class="calc-card result-card">
+        <div class="result-kicker">List price per unit</div>
+        <div class="result-main">
+          <span>After the fees come out</span>
+          <strong id="price">$5.55</strong>
+        </div>
+        <div class="result-sub" id="sub">10% of the sale price goes to fees</div>
+        <div class="result-grid">
+          <div class="metric"><span>Fees per sale</span><strong id="fees">$0.55</strong></div>
+          <div class="metric"><span>Profit per sale</span><strong id="profit">$1.15</strong></div>
+          <div class="metric"><span>Break-even price</span><strong id="be">$4.27</strong></div>
+          <div class="metric"><span>Profit on the batch</span><strong id="batch">$1.15</strong></div>
+        </div>
+        <div class="result-note" id="note">Assumes fees are charged on the item price only, which is how most marketplaces that exclude shipping from commission behave. Check your own platform's schedule.</div>
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#how-selling-fees-stack">How selling fees stack</a></li>
+        <li><a href="#why-you-cannot-just-add-a-percentage-to-your-cost">Why you cannot just add a percentage to your cost</a></li>
+        <li><a href="#worked-example-a-3-84-part-with-postage">Worked example: a $3.84 part with postage</a></li>
+        <li><a href="#what-to-do-about-postage">What to do about postage</a></li>
+        <li><a href="#when-to-price-at-break-even-on-purpose">When to price at break-even on purpose</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="how-selling-fees-stack">How selling fees stack</h2>
+<p>Two fees usually apply to the same sale, and they are charged on the sale price rather than on your cost:</p>
+<ul>
+<li><strong>A marketplace commission.</strong> A percentage of the item price, sometimes with a small fixed component per order. It is charged whether or not you made a profit.</li>
+<li><strong>A payment processing fee.</strong> A percentage plus, often, a small fixed amount. It sits on top of the marketplace fee rather than replacing it.</li>
+</ul>
+<p>Together they take a bite out of the top line, not the bottom. That single fact is what makes the arithmetic on this page a division rather than an addition.</p>
+
+          <h2 id="why-you-cannot-just-add-a-percentage-to-your-cost">Why you cannot just add a percentage to your cost</h2>
+<p>Suppose a part costs $3.84 to produce and you want to keep 30% on top. Multiplying by 1.30 gives $4.99. Charge $4.99 on a platform taking 10% and you receive $4.49 &mdash; which leaves $0.65, or about 17%, not 30%.</p>
+<p>The fee is a share of the price, so the price has to be grossed up:</p>
+<div class="formula">landed cost = cost per part + postage paid &minus; postage charged<br>list price  = landed cost &times; (1 + margin) &divide; (1 &minus; platform fee &minus; payment fee)</div>
+<p>With the numbers above that gives $3.84 &times; 1.30 &divide; 0.90 = $5.55. The 30% margin then survives the fees instead of being eaten by them. On a $3.84 part, getting this wrong costs you about 50 cents a unit &mdash; which across a batch of fifty is a fortnight's filament.</p>
+
+          <h2 id="worked-example-a-3-84-part-with-postage">Worked example: a $3.84 part with postage</h2>
+<p>A part that costs $3.84 to produce, $2.50 of postage paid and $2.50 charged to the buyer, a 30% target margin, and a 6.5% platform fee plus a 3.5% payment fee:</p>
+<div class="example-list">
+  <div class="example-row"><span>Cost to produce</span><strong>$3.84</strong></div>
+  <div class="example-row"><span>Postage paid, less postage charged</span><strong>$0.00</strong></div>
+  <div class="example-row"><span>Landed cost</span><strong>$3.84</strong></div>
+  <div class="example-row"><span>List price before fees are considered</span><strong>$4.99</strong></div>
+  <div class="example-row"><span><b>List price that keeps the margin</b></span><strong>$5.55</strong></div>
+  <div class="example-row"><span>Fees taken by the platform and processor</span><strong>$0.55</strong></div>
+  <div class="example-row"><span>Profit per unit</span><strong>$1.15</strong></div>
+  <div class="example-row"><span>Break-even price, for comparison</span><strong>$4.27</strong></div>
+</div>
+<p>The break-even row is the one to keep in your head. It is what you would have to charge to make exactly nothing. Anything above it is a business; anything below it is a hobby with an invoice.</p>
+
+          <h2 id="what-to-do-about-postage">What to do about postage</h2>
+<p>Postage is where most small sellers quietly lose money, because it is charged as a guess and paid as a fact. Three ways to handle it, in ascending order of safety:</p>
+<ol>
+<li><strong>Charge the full amount.</strong> The buyer covers postage exactly and it disappears from your costing. Simplest, and it makes your item price honest.</li>
+<li><strong>Charge a flat amount and absorb the rest.</strong> Common, and fine as long as the absorbed amount is inside your margin. Enter the difference in the fields above and the calculator will price around it.</li>
+<li><strong>Build postage into the item price.</strong> Offer free shipping and raise the price to cover it. Workable, but remember the platform fee is then charged on the postage you just folded in.</li>
+</ol>
+<p>What does not work is charging a flat $2.50 everywhere while some orders cost $6.00 to send. That is a subsidy you are funding out of the margin, and it tends to show up all at once in a bad month.</p>
+
+          <h2 id="when-to-price-at-break-even-on-purpose">When to price at break-even on purpose</h2>
+<p>There are two good reasons to sell at or near break-even, and both are temporary. First, clearing stock of an item that is not moving: recovering the material is better than storing it. Second, buying a first review on a new listing, where the review itself has a value that shows up later.</p>
+<p>Both cases require you to know the break-even figure, which is exactly what this calculator returns. Pricing near break-even by accident is a different thing entirely, and it is what happens when fees are left out of the arithmetic.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>Fees are treated as a single combined percentage on the item price, and postage is treated as excluded from commission. Both are simplifications. Real marketplace schedules often add a small fixed fee per order, charge a different rate by category, or include shipping in the commission base. Read your own platform's fee page and adjust the two percentage fields to match &mdash; the whole point of the fields is that the schedule is yours, not ours.</p>
+<p>The margin field is what you want to keep, not a recommended rate. This page does not know your market, your competition or what your time is worth.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How do I price a 3D print for sale?</summary><p>Work out the full cost first, then gross up for the fees. If a part costs $3.84 to produce and you want a 30% margin with 10% total fees, the list price is $3.84 times 1.30 divided by 0.90, which is $5.55. Adding 30% to the cost and stopping there gives you $4.99 and an actual margin nearer 17%.</p></details><details><summary>Why is my profit lower than my margin suggests?</summary><p>Because selling fees are charged on the price, not on your cost. A 30% margin and a 10% total fee are not additive: the fee comes out of the price you set, so the price has to be higher than cost plus margin to leave the margin intact.</p></details><details><summary>Should I charge shipping separately or include it?</summary><p>Charging it separately keeps your item price honest and removes postage from your costing. If you offer free shipping, remember that the platform commission is then charged on the postage you folded into the price, so you have to inflate by slightly more than the postage itself.</p></details><details><summary>What is a break-even price?</summary><p>The price at which you make exactly nothing: your landed cost grossed up for fees. For a $3.84 part with 10% total fees it is $4.27. Below that number you are paying the marketplace for the privilege of working.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Get the cost right first</h3>
+            <p>Pricing is a cost figure plus a margin. If the cost is a guess, the price is one too.</p>
+            <a class="btn btn-dark" href="/3d-print-cost-calculator">Full print cost calculator</a>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Read next</h3>
+            <ul>
+              <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li>
+              <li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li>
+            </ul>
+          </div>
+          <p class="note">This page is a calculator, not a quote. Verify fee schedules against your own platform.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+<script>
+function el(i){return document.getElementById(i);}
+function num(i){var e=el(i);var v=e?parseFloat(e.value):NaN;return isNaN(v)?null:v;}
+function sym(){var c=el('currency');return c?c.value:'';}
+function money(v,s){v=v||0;var a=Math.abs(v);if(!isFinite(a))return '—';if(a>=1e9)return (v<0?'-':'')+s+a.toExponential(2);var d=(a===0)?2:(a<0.1?3:2);var p=a.toFixed(d).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return (v<0?'-':'')+s+p.join('.');}
+function set(i,v){var e=el(i);if(e)e.textContent=v;}
+</script><script>
+var F5=['costPerPart','shippingCost','shippingCharged','margin','feePct','payPct','qty'];
+function calculate(){
+  var s=sym(), err=el('err'); err.textContent='';
+  var cost=num('costPerPart'), sc=num('shippingCost'), sh=num('shippingCharged');
+  var margin=num('margin'), fee=num('feePct'), pay=num('payPct'), q=num('qty');
+  if(cost===null||cost<0){err.textContent='Enter the cost to produce one part.';return;}
+  if(sc===null||sc<0)sc=0; if(sh===null||sh<0)sh=0;
+  if(margin===null||margin<0)margin=0; if(fee===null||fee<0)fee=0; if(pay===null||pay<0)pay=0;
+  if(q===null||q<1){q=1;el('qty').value=1;}
+  var landed=cost+sc-sh, feeTotal=fee+pay;
+  var price, fees, profit, be;
+  if(feeTotal>=100){ price=landed*(1+margin/100); fees=0; profit=price-landed; be=landed; }
+  else { price=landed*(1+margin/100)/(1-feeTotal/100); fees=price*feeTotal/100; profit=price-fees-landed; be=landed/(1-feeTotal/100); }
+  set('price',money(price,s));
+  set('sub',feeTotal.toFixed(1)+'% of the sale price goes to fees');
+  set('fees',money(fees,s)); set('profit',money(profit,s));
+  set('be',money(be,s)); set('batch',money(profit*q,s));
+  var note=el('note');
+  if(feeTotal>=100){ note.textContent='Your platform and payment fees add up to 100% or more of the price. No price can cover them — check both fee fields.'; }
+  else if(sh<sc){ note.textContent='You are absorbing '+money(sc-sh,s)+' of postage on every sale. That is already inside the price above; if it grows, the margin shrinks.'; }
+  else { note.textContent='Assumes fees are charged on the item price only, which is how most marketplaces that exclude shipping from commission behave. Check your own platform\u2019s schedule.'; }
+}
+function copyResult(){
+  var t='List price '+el('price').textContent+', fees '+el('fees').textContent+', profit per sale '+el('profit').textContent+'.';
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  var d={costPerPart:3.84,shippingCost:2.50,shippingCharged:2.50,margin:30,feePct:6.5,payPct:3.5,qty:1};
+  for(var k in d){ if(el(k)) el(k).value=d[k]; }
+  if(el('currency')) el('currency').value='$';
+  el('err').textContent=''; calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  F5.forEach(function(i){ if(el(i)) el(i).addEventListener('input',calculate); });
+  el('currency').addEventListener('change',calculate);
+  calculate();
+});
+</script></body>
+</html>

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Print Time &amp; Power Calculator &mdash; What the Hours and kWh Cost</title>
+<meta name="description" content="Convert print hours and average wattage into kilowatt-hours and money: electricity per print, cost per machine hour and the total for a batch.">
+<link rel="canonical" href="https://filamentcostcalculator.com/print-time-cost-calculator">
+<meta property="og:title" content="Print Time &amp; Power Calculator &mdash; What the Hours and kWh Cost">
+<meta property="og:description" content="Convert print hours and average wattage into kilowatt-hours and money: electricity per print, cost per machine hour and the total for a batch.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/print-time-cost-calculator">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-print-time.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Calculators",
+   "item": "https://filamentcostcalculator.com/3d-printing-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Print Time &amp; Power Calculator",
+   "item": "https://filamentcostcalculator.com/print-time-cost-calculator"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Print Time &amp; Power Calculator",
+ "url": "https://filamentcostcalculator.com/print-time-cost-calculator",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in the browser)",
+ "browserRequirements": "Requires JavaScript",
+ "description": "Convert print hours and average wattage into kilowatt-hours and money: electricity per print, cost per machine hour and the total for a batch.",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I calculate the electricity cost of a 3D print?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Multiply the average power draw in kilowatts by the print time in hours to get kilowatt-hours, then multiply by your price per kWh. A 120 W printer running 4.3 hours uses 0.52 kWh; at $0.30/kWh that is 15 cents."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I use the wattage printed on my printer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. That is the maximum the machine can draw, not what it uses while printing. A printer labelled 350 W will often average around 100 to 150 W on a PLA print, because the bed heater cycles rather than running continuously. Use a plug-in energy monitor if you want a figure you can defend."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is electricity a big part of 3D printing costs?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Usually not. On a typical print it is the smallest of the three big costs, well below filament and machine time. Include it because it is easy to state exactly and it prevents long overnight runs being treated as free, not because it changes the price you charge."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does a higher tariff change my pricing?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It changes it by cents per print unless you run many machines continuously. If you are running a farm with several printers going around the clock, power becomes a real line and a cheaper tariff window is worth planning around."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/3d-printing-calculators">Calculators</a><span>/</span>Print Time &amp; Power Calculator</p>
+    <h1>Print Time &amp; Power Calculator</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Turn the hours a printer is occupied and the watts it draws into kilowatt-hours and money. An exact, small number &mdash; and the second line of a full cost breakdown.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Hours and watts</h2>
+            <p>Two numbers, one exact answer. Nothing is sent anywhere.</p>
+          </div>
+          <span class="live-badge">Calculates as you type</span>
+        </div>
+        <div class="field-grid"><div class="field">
+            <label for="hours">Print time</label>
+            <div class="input-wrap"><input id="hours" type="number" min="0" step="0.1" value="4.3"><span class="input-unit">h</span></div>
+            <small>From the slicer, in decimal hours (4 h 20 m = 4.33).</small>
+          </div><div class="field">
+            <label for="watts">Average power draw</label>
+            <div class="input-wrap"><input id="watts" type="number" min="0" step="1" value="120"><span class="input-unit">W</span></div>
+            <small>Average while printing, not the nameplate maximum.</small>
+          </div><div class="field">
+            <label for="tariff">Electricity price</label>
+            <div class="input-wrap"><input id="tariff" type="number" min="0" step="0.01" value="0.30"><span class="input-unit">/kWh</span></div>
+            <small>Take this from your own bill. Do not borrow a national average.</small>
+          </div><div class="field">
+            <label for="qty">How many prints</label>
+            <div class="input-wrap"><input id="qty" type="number" min="1" step="1" value="1"><span class="input-unit">pcs</span></div>
+            <small>For a batch or a full plate.</small>
+          </div><div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="&euro;">EUR / &euro;</option>
+                <option value="&pound;">GBP / &pound;</option>
+                <option value="&yen;">CNY / &yen;</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">&#9662;</span>
+            </div>
+            <small>The maths is currency-neutral.</small>
+          </div></div>
+        <div class="calc-actions">
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset to defaults</button>
+          <a class="btn btn-primary" href="/3d-print-cost-calculator">Add the other five cost lines</a>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+<div class="calc-card result-card">
+        <div class="result-kicker">Electricity per print</div>
+        <div class="result-main">
+          <span>Energy only &mdash; no filament, no machine wear</span>
+          <strong id="pwr">$0.15</strong>
+        </div>
+        <div class="result-sub" id="sub">4.3 h at 120 W average</div>
+        <div class="result-grid">
+          <div class="metric"><span>Energy used</span><strong id="kwh">0.52 kWh</strong></div>
+          <div class="metric"><span>Cost per machine hour</span><strong id="perH">$0.036</strong></div>
+          <div class="metric"><span>Cost of an 8-hour job</span><strong id="day">$0.29</strong></div>
+          <div class="metric"><span>Batch total</span><strong id="batch">$0.15</strong></div>
+        </div>
+        <div class="result-note" id="note">Electricity is usually the smallest of the three big costs. Feed this figure into the full print cost calculator rather than pricing from it.</div>
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#what-this-calculator-works-out">What this calculator works out</a></li>
+        <li><a href="#finding-your-printers-real-power-draw">Finding your printer's real power draw</a></li>
+        <li><a href="#why-your-tariff-matters-more-than-your-printer">Why your tariff matters more than your printer</a></li>
+        <li><a href="#worked-example-a-4-3-hour-print">Worked example: a 4.3-hour print</a></li>
+        <li><a href="#when-the-hours-matter-more-than-the-kilowatt-hours">When the hours matter more than the kilowatt-hours</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="what-this-calculator-works-out">What this calculator works out</h2>
+<p>Two inputs and one multiplication. Electricity cost is the easiest cost on a 3D print to get exactly right, because the arithmetic has no judgement in it at all:</p>
+<div class="formula">energy (kWh) = (watts &divide; 1000) &times; hours<br>cost         = energy &times; your tariff per kWh<br>per hour      = cost &divide; hours</div>
+<p>There is no waste allowance and no failure rate here, because both of those already multiply the machine hours elsewhere. This page answers one question: what did the electricity meter move for this job?</p>
+
+          <h2 id="finding-your-printers-real-power-draw">Finding your printer's real power draw</h2>
+<p>The number on the label is the maximum the machine can pull, not what it pulls while printing. A machine rated 350 W will usually sit far below that during a PLA print, because the bed heater cycles on and off rather than running continuously.</p>
+<p>Three ways to get a usable figure, in order of accuracy:</p>
+<ul>
+<li><strong>Measure it.</strong> A plug-in energy monitor between the wall and the printer, read during a normal print. This is the only figure you can defend, and the meters are cheap.</li>
+<li><strong>Add up the loads.</strong> Bed heater watts &times; its duty cycle, plus hotend watts &times; duty cycle, plus roughly 10 &ndash; 20 W for the board, motors and fans. For a 220 W bed cycling about 40% of the time, a 40 W hotend at about 50%, and 15 W of electronics, expect something near 150 W.</li>
+<li><strong>Start from the label and halve it.</strong> Crude, but closer to reality than the nameplate. Treat the result as a placeholder until you have measured.</li>
+</ul>
+<p>Enclosed printers with a heated chamber sit at the top of the range, because the chamber heater adds a continuous load. A small open bed-slinger printing PLA sits at the bottom.</p>
+
+          <h2 id="why-your-tariff-matters-more-than-your-printer">Why your tariff matters more than your printer</h2>
+<p>Two people running identical machines can differ by a factor of four on this line, purely because of where they live and which tariff they are on. The table below is the same 4.3-hour, 120 W job priced at four different rates &mdash; find the row nearest your own bill rather than using anyone's national average:</p>
+<table class="data-table">
+  <tr><th>Your price per kWh</th><th>Energy used</th><th>Cost for the 4.3 h job</th><th>Cost of a 24 h run</th></tr>
+  <tr><td>$0.10</td><td>0.52 kWh</td><td>$0.05</td><td>$0.29</td></tr>
+  <tr><td>$0.20</td><td>0.52 kWh</td><td>$0.10</td><td>$0.58</td></tr>
+  <tr><td>$0.30</td><td>0.52 kWh</td><td>$0.15</td><td>$0.86</td></tr>
+  <tr><td>$0.45</td><td>0.52 kWh</td><td>$0.23</td><td>$1.30</td></tr>
+</table>
+<p>Even at the top of that range, a single print is cents. The reason to include it is not that it is large &mdash; it is that it is one of the few costs you can state exactly, and it stops a long overnight run being treated as free.</p>
+
+          <h2 id="worked-example-a-4-3-hour-print">Worked example: a 4.3-hour print</h2>
+<p>Print time 4.3 hours, average draw 120 W, tariff $0.30 per kWh:</p>
+<div class="example-list">
+  <div class="example-row"><span>Energy, 0.120 kW &times; 4.3 h</span><strong>0.52 kWh</strong></div>
+  <div class="example-row"><span>Cost, 0.52 kWh at $0.30</span><strong>$0.15</strong></div>
+  <div class="example-row"><span>Same job priced at $0.10/kWh</span><strong>$0.05</strong></div>
+  <div class="example-row"><span>Same job priced at $0.45/kWh</span><strong>$0.23</strong></div>
+  <div class="example-row"><span>Machine time on the same job at $0.20/h</span><strong>$0.86</strong></div>
+</div>
+<p>Put the last two rows side by side and the point of this page becomes obvious. At a plausible machine rate, the hours are worth roughly six times the electricity. That is why the full <a href="/3d-print-cost-calculator">print cost calculator</a> asks for a machine rate and a power figure separately: they are not the same cost wearing two hats.</p>
+
+          <h2 id="when-the-hours-matter-more-than-the-kilowatt-hours">When the hours matter more than the kilowatt-hours</h2>
+<p>Electricity is small, but time is not, and the two behave differently as a print gets longer.</p>
+<p>A 20-hour print does not cost much more to power than a 4-hour one &mdash; it costs five times the machine hours, five times the chance of failing overnight, and five times the plate time you cannot sell to anyone else. Restricting a long print to a cheap tariff window (overnight, or a lower-rate period) saves cents. Clearing the machine for the next paid job saves dollars.</p>
+<p>Use this calculator for the honest, exact, small number. Use the machine-hour rate for the one that actually decides whether the job was worth running.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The default 120 W and $0.30/kWh are the calculator's example values. Both are plausible and neither is measured on your machine or your bill. Change both before you use the result for anything.</p>
+<p>The calculation assumes a constant average draw across the whole print. Real machines vary: heat-up pulls the most, the first layers with a hot bed pull more than the last ones, and a tall print with active part cooling pulls slightly more at the end. Averaging across the whole job is the right simplification for costing, but it will not match a meter reading to the cent.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How do I calculate the electricity cost of a 3D print?</summary><p>Multiply the average power draw in kilowatts by the print time in hours to get kilowatt-hours, then multiply by your price per kWh. A 120 W printer running 4.3 hours uses 0.52 kWh; at $0.30/kWh that is 15 cents.</p></details><details><summary>Should I use the wattage printed on my printer?</summary><p>No. That is the maximum the machine can draw, not what it uses while printing. A printer labelled 350 W will often average around 100 to 150 W on a PLA print, because the bed heater cycles rather than running continuously. Use a plug-in energy monitor if you want a figure you can defend.</p></details><details><summary>Is electricity a big part of 3D printing costs?</summary><p>Usually not. On a typical print it is the smallest of the three big costs, well below filament and machine time. Include it because it is easy to state exactly and it prevents long overnight runs being treated as free, not because it changes the price you charge.</p></details><details><summary>Does a higher tariff change my pricing?</summary><p>It changes it by cents per print unless you run many machines continuously. If you are running a farm with several printers going around the clock, power becomes a real line and a cheaper tariff window is worth planning around.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Power is one of six lines</h3>
+            <p>Add filament, machine hours, failures, labour and packaging to get a cost you can price from.</p>
+            <a class="btn btn-dark" href="/3d-print-cost-calculator">Full print cost calculator</a>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Read next</h3>
+            <ul>
+              <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li>
+            </ul>
+          </div>
+          <p class="note">This page is a calculator, not a quote. Defaults are assumptions &mdash; check your own bill.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+<script>
+function el(i){return document.getElementById(i);}
+function num(i){var e=el(i);var v=e?parseFloat(e.value):NaN;return isNaN(v)?null:v;}
+function sym(){var c=el('currency');return c?c.value:'';}
+function money(v,s){v=v||0;var a=Math.abs(v);if(!isFinite(a))return '—';if(a>=1e9)return (v<0?'-':'')+s+a.toExponential(2);var d=(a===0)?2:(a<0.1?3:2);var p=a.toFixed(d).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return (v<0?'-':'')+s+p.join('.');}
+function set(i,v){var e=el(i);if(e)e.textContent=v;}
+</script><script>
+var F2=['hours','watts','tariff','qty'];
+function calculate(){
+  var s=sym(), err=el('err'); err.textContent='';
+  var h=num('hours'), w=num('watts'), t=num('tariff'), q=num('qty');
+  if(h===null||h<0)h=0; if(w===null||w<0)w=0; if(t===null||t<0)t=0;
+  if(q===null||q<1){q=1;el('qty').value=1;}
+  var kwh=(w/1000)*h, cost=kwh*t;
+  set('pwr',money(cost,s));
+  set('sub',h+' h at '+w+' W average');
+  set('kwh',kwh.toFixed(2)+' kWh');
+  set('perH',h>0?money(cost/h,s):money(0,s));
+  set('day',money((w/1000)*8*t,s));
+  set('batch',money(cost*q,s));
+  var note=el('note');
+  if(w===0){ note.textContent='Power draw is zero, so the electricity cost is zero. Enter the average draw in watts.'; }
+  else if(h>12){ note.textContent='Long run: '+(w/1000*h).toFixed(2)+' kWh. The machine hours matter far more than the energy at this length — include them in the full cost calculator.'; }
+  else { note.textContent='Electricity is usually the smallest of the three big costs. Feed this figure into the full print cost calculator rather than pricing from it.'; }
+}
+function copyResult(){
+  var t='Electricity per print: '+el('pwr').textContent+' ('+el('kwh').textContent+')';
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  var d={hours:4.3,watts:120,tariff:0.30,qty:1};
+  for(var k in d){ if(el(k)) el(k).value=d[k]; }
+  if(el('currency')) el('currency').value='$';
+  el('err').textContent=''; calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  F2.forEach(function(i){ if(el(i)) el(i).addEventListener('input',calculate); });
+  el('currency').addEventListener('change',calculate);
+  calculate();
+});
+</script></body>
+</html>

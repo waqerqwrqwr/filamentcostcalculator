@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Print Cost Calculator &mdash; Material, Time, Power, Failures</title>
+<meta name="description" content="Add up what a print really costs: filament, machine hours, electricity, a failure allowance, your time and packaging. Returns a cost per part and a price.">
+<link rel="canonical" href="https://filamentcostcalculator.com/3d-print-cost-calculator">
+<meta property="og:title" content="3D Print Cost Calculator &mdash; Material, Time, Power, Failures">
+<meta property="og:description" content="Add up what a print really costs: filament, machine hours, electricity, a failure allowance, your time and packaging. Returns a cost per part and a price.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/3d-print-cost-calculator">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-print-cost.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Calculators",
+   "item": "https://filamentcostcalculator.com/3d-printing-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "3D Print Cost Calculator",
+   "item": "https://filamentcostcalculator.com/3d-print-cost-calculator"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "3D Print Cost Calculator",
+ "url": "https://filamentcostcalculator.com/3d-print-cost-calculator",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in the browser)",
+ "browserRequirements": "Requires JavaScript",
+ "description": "Add up what a print really costs: filament, machine hours, electricity, a failure allowance, your time and packaging. Returns a cost per part and a price.",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I work out what a 3D print costs to make?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Add six lines: filament used including waste, machine hours at your own hourly rate, electricity in kilowatt-hours, an allowance for failed prints, your hands-on time, and packaging. On a 45 g print with the site's defaults that comes to about $3.84. Filament alone would have been $1.11, which is why pricing from the spool sticker fails."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should machine time be included if I already own the printer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Ownership is a separate question from consumption. A printer running one job cannot run another, so every print has an opportunity cost equal to the machine hours it occupies. If you leave it out, long light prints price below cost and you will not notice until the nozzle needs replacing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a reasonable failure rate to use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Use your own, measured: count the prints you scrapped last month and divide by the total you started. For a dialled-in printer on a familiar material 5% to 10% is common. While you are tuning a new filament or pushing a difficult geometry, 15% or more is realistic. Never set it to zero &mdash; a rate of zero means you have not counted."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why can't I just add my margin to the cost?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because selling fees are charged on the sale price, not on your cost. To keep 30% after a 10% total fee you have to divide by (1 &minus; 0.10), not multiply by 1.30. On a $3.84 part the difference is $0.50 of profit per unit, which compounds fast across a batch."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/3d-printing-calculators">Calculators</a><span>/</span>3D Print Cost Calculator</p>
+    <h1>3D Print Cost Calculator</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Add up the whole print, not just the plastic. Filament, machine hours, electricity, a failure allowance, your own time and packaging &mdash; then a price once your margin and selling fees are included.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Everything a print costs</h2>
+            <p>Six cost lines plus your margin and fees. Nothing is sent anywhere.</p>
+          </div>
+          <span class="live-badge">Calculates as you type</span>
+        </div>
+        <div class="field-grid"><div class="field">
+            <label for="spoolPrice">Price paid for the spool</label>
+            <div class="input-wrap"><input id="spoolPrice" type="number" min="0" step="0.01" value="22"><span class="input-unit">USD</span></div>
+            <small>Include tax and shipping for the landed cost.</small>
+          </div><div class="field">
+            <label for="netWeight">Filament on the spool</label>
+            <div class="input-wrap"><input id="netWeight" type="number" min="1" step="1" value="1000"><span class="input-unit">g</span></div>
+            <small>Net weight, not the shipping weight of the box.</small>
+          </div><div class="field">
+            <label for="partWeight">Filament used per print</label>
+            <div class="input-wrap"><input id="partWeight" type="number" min="0" step="0.1" value="45"><span class="input-unit">g</span></div>
+            <small>Your slicer's material estimate.</small>
+          </div><div class="field">
+            <label for="waste">Waste allowance</label>
+            <div class="input-wrap"><input id="waste" type="number" min="0" step="1" max="80" value="12"><span class="input-unit">%</span></div>
+            <small>Purge, brim, supports, failed starts.</small>
+          </div><div class="field">
+            <label for="hours">Print time</label>
+            <div class="input-wrap"><input id="hours" type="number" min="0" step="0.1" value="4.3"><span class="input-unit">h</span></div>
+            <small>From the slicer, in decimal hours (4 h 20 m = 4.33).</small>
+          </div><div class="field">
+            <label for="machineRate">Machine cost per hour</label>
+            <div class="input-wrap"><input id="machineRate" type="number" min="0" step="0.01" value="0.20"><span class="input-unit">/h</span></div>
+            <small>What the printer costs you per hour it is occupied.</small>
+          </div><div class="field">
+            <label for="watts">Average power draw</label>
+            <div class="input-wrap"><input id="watts" type="number" min="0" step="1" value="120"><span class="input-unit">W</span></div>
+            <small>Average while printing, not the nameplate maximum.</small>
+          </div><div class="field">
+            <label for="tariff">Electricity price</label>
+            <div class="input-wrap"><input id="tariff" type="number" min="0" step="0.01" value="0.30"><span class="input-unit">/kWh</span></div>
+            <small>From your own bill, including standing charges if you like.</small>
+          </div><div class="field">
+            <label for="failRate">Failure rate</label>
+            <div class="input-wrap"><input id="failRate" type="number" min="0" step="1" max="80" value="8"><span class="input-unit">%</span></div>
+            <small>Share of jobs that fail outright and must be reprinted.</small>
+          </div><div class="field">
+            <label for="minutes">Hands-on time per print</label>
+            <div class="input-wrap"><input id="minutes" type="number" min="0" step="1" value="6"><span class="input-unit">min</span></div>
+            <small>Removing supports, sanding, packing.</small>
+          </div><div class="field">
+            <label for="labourRate">Your time, per hour</label>
+            <div class="input-wrap"><input id="labourRate" type="number" min="0" step="0.5" value="12"><span class="input-unit">/h</span></div>
+            <small>Pick a rate you would actually accept.</small>
+          </div><div class="field">
+            <label for="packaging">Packaging per part</label>
+            <div class="input-wrap"><input id="packaging" type="number" min="0" step="0.01" value="0.35"><span class="input-unit">USD</span></div>
+            <small>Box, bag, tape, insert card.</small>
+          </div><div class="field">
+            <label for="qty">How many prints</label>
+            <div class="input-wrap"><input id="qty" type="number" min="1" step="1" value="1"><span class="input-unit">pcs</span></div>
+            <small>For batch work and quotes.</small>
+          </div><div class="field">
+            <label for="margin">Margin you want</label>
+            <div class="input-wrap"><input id="margin" type="number" min="0" step="1" value="30"><span class="input-unit">%</span></div>
+            <small>On top of cost, before selling fees.</small>
+          </div><div class="field">
+            <label for="feePct">Platform fee</label>
+            <div class="input-wrap"><input id="feePct" type="number" min="0" step="0.1" max="60" value="6.5"><span class="input-unit">%</span></div>
+            <small>Marketplace commission on the sale price.</small>
+          </div><div class="field">
+            <label for="payPct">Payment fee</label>
+            <div class="input-wrap"><input id="payPct" type="number" min="0" step="0.1" max="30" value="3.5"><span class="input-unit">%</span></div>
+            <small>Card or processor fee, charged on the sale price.</small>
+          </div><div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="&euro;">EUR / &euro;</option>
+                <option value="&pound;">GBP / &pound;</option>
+                <option value="&yen;">CNY / &yen;</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">&#9662;</span>
+            </div>
+            <small>The maths is currency-neutral.</small>
+          </div></div>
+        <div class="calc-actions">
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset to defaults</button>
+          <a class="btn btn-primary" href="/filament-cost-calculator">Just the filament cost</a>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+<div class="calc-card result-card">
+        <div class="result-kicker">Cost to produce one part</div>
+        <div class="result-main">
+          <span>Everything except selling fees</span>
+          <strong id="total">$3.84</strong>
+        </div>
+        <div class="result-sub" id="sub">50.4 g effective, 4.3 h on the machine</div>
+        <div class="result-grid">
+          <div class="metric"><span>Filament</span><strong id="mFil">$1.11</strong></div>
+          <div class="metric"><span>Machine time</span><strong id="mMach">$0.86</strong></div>
+          <div class="metric"><span>Electricity</span><strong id="mPwr">$0.15</strong></div>
+          <div class="metric"><span>Failure allowance</span><strong id="mFail">$0.17</strong></div>
+          <div class="metric"><span>Your time</span><strong id="mLab">$1.20</strong></div>
+          <div class="metric"><span>Packaging</span><strong id="mPack">$0.35</strong></div>
+        </div>
+        <div class="result-note" id="note">Enter your own figures above. The defaults are the calculator's example values, not market rates.</div>
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#what-this-calculator-adds-up">What this calculator adds up</a></li>
+        <li><a href="#why-machine-time-is-the-line-everybody-forgets">Why machine time is the line everybody forgets</a></li>
+        <li><a href="#worked-example-a-45-g-phone-stand">Worked example: a 45 g phone stand</a></li>
+        <li><a href="#how-to-set-your-machine-hour-rate">How to set your machine-hour rate</a></li>
+        <li><a href="#what-to-leave-out-of-a-per-part-cost">What to leave out of a per-part cost</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="what-this-calculator-adds-up">What this calculator adds up</h2>
+<p>Six lines go into a part cost, and the price you charge sits on top of all six. The calculator never hides one behind an average:</p>
+<div class="formula">filament   = model weight &times; (1 + waste) &times; (spool price &divide; spool net weight)<br>machine    = print hours &times; machine cost per hour<br>electricity= (watts &divide; 1000) &times; print hours &times; tariff per kWh<br>subtotal   = filament + machine + electricity<br>failure    = subtotal &times; failure rate<br>labour     = (hands-on minutes &divide; 60) &times; your hourly rate<br><br>cost per part = subtotal + failure + labour + packaging<br>price         = cost &times; (1 + margin) &divide; (1 &minus; platform fee &minus; payment fee)</div>
+<p>Note the order of the last line. Fees come out of the sale price, so you cannot simply add a percentage to your cost &mdash; the fee has to be grossed up, which is why the division is there rather than a plain addition.</p>
+
+          <h2 id="why-machine-time-is-the-line-everybody-forgets">Why machine time is the line everybody forgets</h2>
+<p>Filament is visible. You buy a spool, you watch it empty. Machine time is invisible, because the printer is already bought and paid for and the electricity bill arrives as one number at the end of the month.</p>
+<p>The test is opportunity cost. A printer running a 14-hour job cannot run anything else for 14 hours. If you could sell that same machine hour for $0.20 on another job, then this job consumed $2.80 of capacity whether or not any money changed hands during it. That is the number the machine-hour field is asking for.</p>
+<p>The common failure is pricing a light, long print from material alone. A 12 g model that takes 9 hours looks like a 26-cent part. Add the machine hours, the electricity and a failure allowance and it is closer to a $3 part. On long prints, material is usually the smallest of the three big costs.</p>
+
+          <h2 id="worked-example-a-45-g-phone-stand">Worked example: a 45 g phone stand</h2>
+<p>Using the calculator's own defaults &mdash; a $22 spool of 1000 g, a 45 g model, 12% waste, 4.3 hours on a machine costed at $0.20/h drawing 120 W at $0.30/kWh, an 8% failure rate, 6 minutes of your time at $12/h and $0.35 of packaging:</p>
+<div class="example-list">
+  <div class="example-row"><span>Filament, 45 g model, 50.4 g with waste</span><strong>$1.11</strong></div>
+  <div class="example-row"><span>Machine time, 4.3 h at $0.20</span><strong>$0.86</strong></div>
+  <div class="example-row"><span>Electricity, 0.52 kWh at $0.30</span><strong>$0.15</strong></div>
+  <div class="example-row"><span>Failure allowance, 8% of $2.12</span><strong>$0.17</strong></div>
+  <div class="example-row"><span>Your time, 6 min at $12/h</span><strong>$1.20</strong></div>
+  <div class="example-row"><span>Packaging</span><strong>$0.35</strong></div>
+  <div class="example-row"><span><b>Cost to produce</b></span><strong>$3.84</strong></div>
+  <div class="example-row"><span>Price at a 30% margin with 10% of fees</span><strong>$5.55</strong></div>
+  <div class="example-row"><span>Profit per part after fees</span><strong>$1.15</strong></div>
+</div>
+<p>The interesting number is the last one. A 30% margin sounds like it should leave about a dollar on a $3.84 part, and it does &mdash; but only after the $0.55 of selling fees has been absorbed. Price from cost plus margin without grossing the fees up, and you keep $0.65 instead.</p>
+
+          <h2 id="how-to-set-your-machine-hour-rate">How to set your machine-hour rate</h2>
+<p>There is no industry figure to look up here, and any site that gives you one is guessing. Three defensible ways to arrive at your own:</p>
+<ul>
+<li><strong>Opportunity cost.</strong> The rate you are already paid for that machine hour on other work. If your order book is full, this is the correct number.</li>
+<li><strong>Replacement.</strong> Printer price divided by the hours you expect it to run before you replace it, plus an allowance for nozzles, belts, wheels and the occasional board. A $600 printer you expect to run 4000 hours before replacing is $0.15/h before parts.</li>
+<li><strong>Floor.</strong> What you would have to charge to fund the machine out of this job alone. Useful for one-off quotes on equipment you bought specifically for a customer.</li>
+</ul>
+<p>Whatever you pick, put it in the field and keep it consistent between jobs. A number that changes per customer is not a rate, it is a markup.</p>
+
+          <h2 id="what-to-leave-out-of-a-per-part-cost">What to leave out of a per-part cost</h2>
+<p>Design time, photography, listing fees, advertising and your phone bill are real costs, but they are costs of <em>running the shop</em>, not of producing one part. Folding them into a per-part figure makes the part look expensive and hides the fact that your shop overhead is the problem.</p>
+<p>Keep them separate: a per-part cost that covers material, machine, power, failures, labour and packaging, and a monthly overhead you recover through the margin. That way, when a customer asks you to justify a price, you can show them six lines they can check.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The defaults are examples chosen to be plausible &mdash; a $22 spool, 4.3 hours, 120 W, $0.30/kWh, an 8% failure rate. They are not measured averages, and filament, electricity and marketplace fees all move. The labour rate is a placeholder for your own time, not advice about what to charge.</p>
+<p>The calculator assumes one print per job and that your failure rate applies uniformly. Neither is quite true: a failure on a 14-hour print costs more than a failure on a keyring. If you are quoting something long, raise the failure allowance for that quote specifically rather than permanently raising it for everything.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How do I work out what a 3D print costs to make?</summary><p>Add six lines: filament used including waste, machine hours at your own hourly rate, electricity in kilowatt-hours, an allowance for failed prints, your hands-on time, and packaging. On a 45 g print with the site's defaults that comes to about $3.84. Filament alone would have been $1.11, which is why pricing from the spool sticker fails.</p></details><details><summary>Should machine time be included if I already own the printer?</summary><p>Yes. Ownership is a separate question from consumption. A printer running one job cannot run another, so every print has an opportunity cost equal to the machine hours it occupies. If you leave it out, long light prints price below cost and you will not notice until the nozzle needs replacing.</p></details><details><summary>What is a reasonable failure rate to use?</summary><p>Use your own, measured: count the prints you scrapped last month and divide by the total you started. For a dialled-in printer on a familiar material 5% to 10% is common. While you are tuning a new filament or pushing a difficult geometry, 15% or more is realistic. Never set it to zero &mdash; a rate of zero means you have not counted.</p></details><details><summary>Why can't I just add my margin to the cost?</summary><p>Because selling fees are charged on the sale price, not on your cost. To keep 30% after a 10% total fee you have to divide by (1 &minus; 0.10), not multiply by 1.30. On a $3.84 part the difference is $0.50 of profit per unit, which compounds fast across a batch.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Start with the material number</h3>
+            <p>If you only trust one figure, make it cost per gram. It is the input every other calculation reuses.</p>
+            <a class="btn btn-dark" href="/filament-cost-calculator">Filament cost calculator</a>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Read next</h3>
+            <ul>
+              <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li>
+              <li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li>
+            </ul>
+          </div>
+          <p class="note">This page is a calculator, not a quote. Defaults are assumptions &mdash; check your own receipts.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+<script>
+function el(i){return document.getElementById(i);}
+function num(i){var e=el(i);var v=e?parseFloat(e.value):NaN;return isNaN(v)?null:v;}
+function sym(){var c=el('currency');return c?c.value:'';}
+function money(v,s){v=v||0;var a=Math.abs(v);if(!isFinite(a))return '—';if(a>=1e9)return (v<0?'-':'')+s+a.toExponential(2);var d=(a===0)?2:(a<0.1?3:2);var p=a.toFixed(d).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return (v<0?'-':'')+s+p.join('.');}
+function set(i,v){var e=el(i);if(e)e.textContent=v;}
+</script><script>
+var F1=['spoolPrice','netWeight','partWeight','waste','hours','machineRate','watts','tariff',
+        'failRate','minutes','labourRate','packaging','qty','margin','feePct','payPct'];
+function calculate(){
+  var s=sym();
+  var p=num('spoolPrice'),w=num('netWeight'),part=num('partWeight'),waste=num('waste');
+  var hrs=num('hours'),mrate=num('machineRate'),watts=num('watts'),tar=num('tariff');
+  var fail=num('failRate'),mins=num('minutes'),lrate=num('labourRate'),pack=num('packaging');
+  var qty=num('qty'),margin=num('margin'),fee=num('feePct'),pay=num('payPct');
+  var err=el('err'); err.textContent='';
+  if(w===null||w<=0){err.textContent='Enter the net filament weight in grams (for example 1000).';return;}
+  if(p===null||p<0)p=0; if(part===null||part<0)part=0; if(waste===null||waste<0)waste=0;
+  if(hrs===null||hrs<0)hrs=0; if(mrate===null||mrate<0)mrate=0;
+  if(watts===null||watts<0)watts=0; if(tar===null||tar<0)tar=0;
+  if(fail===null||fail<0)fail=0; if(mins===null||mins<0)mins=0; if(lrate===null||lrate<0)lrate=0;
+  if(pack===null||pack<0)pack=0; if(qty===null||qty<1){qty=1;el('qty').value=1;}
+  if(margin===null||margin<0)margin=0; if(fee===null||fee<0)fee=0; if(pay===null||pay<0)pay=0;
+
+  var eff=part*(1+waste/100), filament=eff*(p/w);
+  var machine=hrs*mrate, kwh=(watts/1000)*hrs, power=kwh*tar;
+  var subtotal=filament+machine+power, failure=subtotal*fail/100;
+  var labour=(mins/60)*lrate;
+  var cost=subtotal+failure+labour+pack;
+  var feeTotal=fee+pay;
+  var price = feeTotal<100 ? cost*(1+margin/100)/(1-feeTotal/100) : cost*(1+margin/100);
+  var fees=price*feeTotal/100, profit=price-fees-cost;
+
+  set('total',money(cost,s));
+  set('sub',eff.toFixed(1)+' g effective, '+hrs+' h on the machine');
+  set('mFil',money(filament,s)); set('mMach',money(machine,s)); set('mPwr',money(power,s));
+  set('mFail',money(failure,s)); set('mLab',money(labour,s)); set('mPack',money(pack,s));
+
+  var note=el('note');
+  if (feeTotal>=100){ note.textContent='Your platform and payment fees add up to 100% or more, so no price can cover them. Check the fee fields.'; }
+  else {
+    note.innerHTML='Suggested price per part <b>'+money(price,s)+'</b>, of which <b>'+money(fees,s)+'</b> goes to fees, leaving <b>'+money(profit,s)+'</b> profit. Batch of '+qty+': cost '+money(cost*qty,s)+', revenue '+money(price*qty,s)+', profit '+money(profit*qty,s)+'.';
+  }
+}
+function copyResult(){
+  var s=sym();
+  var t='Cost per part '+money(num('spoolPrice')===null?0:0,s)+'';
+  t='3D print cost: '+el('total').textContent+' per part. '+el('note').textContent.replace(/<[^>]+>/g,'');
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  var d={spoolPrice:22,netWeight:1000,partWeight:45,waste:12,hours:4.3,machineRate:0.20,watts:120,
+         tariff:0.30,failRate:8,minutes:6,labourRate:12,packaging:0.35,qty:1,margin:30,feePct:6.5,payPct:3.5};
+  for(var k in d){ if(el(k)) el(k).value=d[k]; }
+  if(el('currency')) el('currency').value='$';
+  el('err').textContent='';
+  calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  F1.forEach(function(i){ if(el(i)) el(i).addEventListener('input',calculate); });
+  el('currency').addEventListener('change',calculate);
+  calculate();
+});
+</script></body>
+</html>

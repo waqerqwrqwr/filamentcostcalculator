@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why Failed Prints Must Be Costed Into the Price</title>
+<meta name="description" content="A failure rate is a multiplier on material, machine hours and your time. How to measure your own rate and what it adds to every good part you ship.">
+<link rel="canonical" href="https://filamentcostcalculator.com/guides/why-failed-prints-must-be-costed">
+<meta property="og:title" content="Why Failed Prints Must Be Costed Into the Price">
+<meta property="og:description" content="A failure rate is a multiplier on material, machine hours and your time. How to measure your own rate and what it adds to every good part you ship.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/guides/why-failed-prints-must-be-costed">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-guides.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://filamentcostcalculator.com/guides"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Why failed prints belong in the price",
+   "item": "https://filamentcostcalculator.com/guides/why-failed-prints-must-be-costed"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Why failed prints belong in the price",
+ "description": "A failure rate is a multiplier on material, machine hours and your time. How to measure your own rate and what it adds to every good part you ship.",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://filamentcostcalculator.com/guides/why-failed-prints-must-be-costed"
+ },
+ "datePublished": "2026-10-12",
+ "dateModified": "2026-10-12",
+ "author": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Why should failed prints be included in my prices?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because the material and machine hours they consume are real and paid for. If 8% of your prints fail, you have to start about 109 prints to deliver 100, so every good part carries roughly 8.7% more cost than a single successful print does. Leaving it out does not remove the cost, it just moves it into a thinner margin."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I work out my failure rate?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Count the prints you started last month from your slicer or print-management history, count the ones you scrapped as unusable, and divide. Do it per material rather than overall, because a printer that runs PLA at 4% may run flexible filament at 25%."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a normal failure rate for 3D printing?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "There is no meaningful industry number, and this site will not invent one. Rates depend on the machine, the material, the geometry and how well maintained everything is. A dialled-in printer on a familiar material commonly sits in single digits; a new material on a machine that has not been levelled recently is far higher."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I raise the failure rate permanently?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Only if the rate is genuinely permanent. If one cause accounts for most of your failures, fixing it is worth more than charging for it &mdash; and a lower failure rate lets you price lower, which is an advantage you keep permanently."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides">Guides</a><span>/</span>Why failed prints belong in the price</p>
+    <h1>Why failed prints belong in the price</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">A failure does not just waste plastic. It consumes machine hours, your time and queue position. This is how to measure your own rate and what it adds to every good part you ship.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#what-a-failure-actually-costs">What a failure actually costs</a></li>
+        <li><a href="#the-arithmetic-you-must-produce-more-than-you-sell">The arithmetic: you must produce more than you sell</a></li>
+        <li><a href="#measuring-your-own-failure-rate">Measuring your own failure rate</a></li>
+        <li><a href="#where-failures-actually-come-from">Where failures actually come from</a></li>
+        <li><a href="#how-to-price-for-it-without-hiding-it">How to price for it without hiding it</a></li>
+        <li><a href="#when-to-fix-the-process-instead">When to fix the process instead</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="what-a-failure-actually-costs">What a failure actually costs</h2>
+<p>A failed print does not just waste the plastic already laid down. It consumes four things at once, and only one of them is material:</p>
+<ul>
+<li><strong>Filament.</strong> Usually partial, occasionally the whole model plus supports and brim.</li>
+<li><strong>Machine hours.</strong> The printer was occupied for the entire duration of the failure, including the hour before anyone noticed it had gone wrong.</li>
+<li><strong>Your time.</strong> Noticing, scrapping, cleaning the plate, re-slicing, restarting.</li>
+<li><strong>Queue position.</strong> The machine that was going to print a paid job next is now printing a free one.</li>
+</ul>
+<p>Material is the visible loss and usually the smallest. The hours are the expensive part, because hours do not come back.</p>
+
+          <h2 id="the-arithmetic-you-must-produce-more-than-you-sell">The arithmetic: you must produce more than you sell</h2>
+<p>A failure rate is a multiplier on everything you do. If 8% of the prints you start are scrapped, then to deliver 100 good parts you must start about 109.</p>
+<div class="formula">parts you must start = good parts &divide; (1 &minus; failure rate)</div>
+<p>Consider a part that costs $3.84 to make when it succeeds. At an 8% failure rate, every good part you ship effectively carries $3.84 &divide; 0.92 = <b>$4.17</b> of cost &mdash; an extra $0.33 per part, or 8.7% on top of everything.</p>
+<p>At a 20% failure rate, common while tuning a difficult geometry or a new material, the same logic gives $3.84 &divide; 0.80 = $4.80. That is $0.96 per good part, a quarter more than the successful-print cost. Setting the failure rate to zero does not remove the cost. It just moves it out of the spreadsheet and into your margin.</p>
+
+          <h2 id="measuring-your-own-failure-rate">Measuring your own failure rate</h2>
+<p>There is no useful industry figure, and anyone quoting one is selling something. Yours is measurable in about five minutes a month.</p>
+<ol>
+<li>Count the prints you <em>started</em> in the last 30 days. Slicer history or a print-management tool will show this.</li>
+<li>Count the ones you scrapped as unusable &mdash; not the ones with a cosmetic flaw you sold anyway.</li>
+<li>Divide. That is your real rate for the work you actually take on.</li>
+</ol>
+<p>Do it separately for each material if you print more than one. Failure rates are material-specific and geometry-specific: a printer that runs PLA at 4% may run a flexible filament at 25%, and averaging the two produces a number that is wrong for both.</p>
+
+          <h2 id="where-failures-actually-come-from">Where failures actually come from</h2>
+<p>Failures cluster. Four causes account for most of them, and each is addressable without new equipment:</p>
+<table class="data-table">
+  <tr><th>Cause</th><th>What it looks like</th><th>What reduces it</th></tr>
+  <tr><td>First layer</td><td>Part detached or shifted hours in</td><td>Level (or probe) the bed, clean it, slow the first layer</td></tr>
+  <tr><td>Wet filament</td><td>Bubbling, poor layer bonding, random blobbing</td><td>Dry the spool, store sealed with desiccant</td></tr>
+  <tr><td>Geometry</td><td>Tall thin parts wobbling, overhangs collapsing</td><td>Rotate the model, add support, slow down</td></tr>
+  <tr><td>Wear</td><td>Under-extrusion appearing gradually</td><td>Check the nozzle and extruder tension on a schedule</td></tr>
+</table>
+<p>Wet filament is the one people skip, because the spool looks fine and the failure looks random. It is neither &mdash; it is usually a spool that has been open for months.</p>
+
+          <h2 id="how-to-price-for-it-without-hiding-it">How to price for it without hiding it</h2>
+<p>Two legitimate approaches, and they produce the same price:</p>
+<p><strong>Gross up at the end.</strong> Compute your successful-part cost, then divide by (1 &minus; failure rate) to get the cost you actually carry. Simple, and easy to explain to a customer who asks why the price is what it is.</p>
+<p><strong>Price the failures as a line.</strong> Show a failure allowance as its own row in the breakdown &mdash; the <a href="/3d-print-cost-calculator">print cost calculator</a> does this. Slightly more work, but it makes the number visible, and visible costs are the ones people remember to check.</p>
+<p>What does not work is quoting a rate you have not measured, then defending it when someone asks how you arrived at it.</p>
+
+          <h2 id="when-to-fix-the-process-instead">When to fix the process instead</h2>
+<p>Pricing around failures is only correct while the failures are genuinely variable. There comes a rate at which the better answer is to stop printing until the process is fixed.</p>
+<p>A useful test: if a single cause accounts for more than half your failures, it is a process problem, not an environmental one. A first-layer issue that recurs every third print is not something to charge customers for &mdash; it is a bed preparation problem with a solution that costs nothing but an evening. Once the rate is down, the price can come down, which is a competitive advantage you bought with maintenance rather than with margin.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The 8% default is the calculator's example figure, not a measured average. The whole argument of this page is that your own number is the only one worth using, and that it must be counted rather than estimated.</p>
+<p>The arithmetic assumes failures are independent and that a failed print is scrapped entirely. Partial failures &mdash; prints that finish but have a cosmetic flaw you can still sell &mdash; do not consume a full material allowance, and it is fair to exclude them from the rate.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>Why should failed prints be included in my prices?</summary><p>Because the material and machine hours they consume are real and paid for. If 8% of your prints fail, you have to start about 109 prints to deliver 100, so every good part carries roughly 8.7% more cost than a single successful print does. Leaving it out does not remove the cost, it just moves it into a thinner margin.</p></details><details><summary>How do I work out my failure rate?</summary><p>Count the prints you started last month from your slicer or print-management history, count the ones you scrapped as unusable, and divide. Do it per material rather than overall, because a printer that runs PLA at 4% may run flexible filament at 25%.</p></details><details><summary>What is a normal failure rate for 3D printing?</summary><p>There is no meaningful industry number, and this site will not invent one. Rates depend on the machine, the material, the geometry and how well maintained everything is. A dialled-in printer on a familiar material commonly sits in single digits; a new material on a machine that has not been levelled recently is far higher.</p></details><details><summary>Should I raise the failure rate permanently?</summary><p>Only if the rate is genuinely permanent. If one cause accounts for most of your failures, fixing it is worth more than charging for it &mdash; and a lower failure rate lets you price lower, which is an advantage you keep permanently.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Add a failure allowance</h3>
+            <p>The calculator has a failure-rate field. Put your measured rate in it and the price moves.</p>
+            <a class="btn btn-dark" href="/3d-print-cost-calculator">Add a failure allowance</a>
+          </div>
+          <div class="side-card">
+            <h3>More guides</h3>
+            <ul>
+              <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li><li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li><li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li><li><a href="/guides/infill-vs-strength-and-cost">Infill: strength versus cost</a></li><li><a href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <p class="note">This guide is explanatory, not financial advice. The 8% figure is the calculators' example default, not a measured average.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

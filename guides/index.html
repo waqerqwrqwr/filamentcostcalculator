@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Printing Guides — Filament, Settings and Print Cost</title>
+<meta name="description" content="Short guides explaining the assumptions behind 3D printing cost: cost per gram, print time, infill, materials and failed prints.">
+<link rel="canonical" href="https://filamentcostcalculator.com/guides">
+<meta property="og:title" content="3D Printing Guides — Filament, Settings and Print Cost">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://filamentcostcalculator.com/guides">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-guides.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "CollectionPage",
+ "name": "3D printing cost guides",
+ "url": "https://filamentcostcalculator.com/guides",
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="tool-hero">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span>Guides</p>
+    <h1>3D printing cost guides</h1>
+    <p>Each guide explains one assumption the calculators rely on, in the order most people need it: what material costs, what else a print costs, and which slicer settings move the total.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:14px 0 0">
+  <div class="container">
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+  </div>
+</section>
+
+<section class="photo-band">
+  <div class="container">
+    <figure class="photo-band-inner">
+      <img src="/assets/ultimaker-printing.jpg" alt="A 3D printer laying down layers of filament onto a glass build plate" width="1280" height="854" decoding="async">
+      <figcaption class="photo-band-cap">
+        <strong>A 3D printer laying down layers of filament</strong>
+        <span>The guides explain which of the two costs on a print &mdash; the plastic and the machine hours &mdash; you can actually change, and which are fixed by the slicer settings.
+        
+        </span>
+        <span class="credit">Photo: Maurizio Pesce, Wikimedia Commons, CC BY 2.0</span>
+      </figcaption>
+    </figure>
+  </div>
+
+</section>
+<section class="tools-index">
+  <div class="container">
+    <div class="tool-group">
+      <div class="tool-group-head">
+        <div>
+          <h2>Cost fundamentals</h2>
+          <p>Start here if you are costing prints for the first time.</p>
+        </div>
+        <span class="badge-count">2 guides</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool-card" href="/guides/filament-cost-per-gram">
+          <div class="tool-card-top"><span class="tool-icon">01</span><span class="tool-arrow">→</span></div>
+          <h3>Cost per gram, done properly</h3>
+          <p>Net weight, shipping weight, spool tails and short-filled reels — the only fair way to compare filament.</p>
+          <span class="tag">Guide</span>
+        </a>
+        <a class="tool-card" href="/guides/3d-print-cost-breakdown">
+          <div class="tool-card-top"><span class="tool-icon">02</span><span class="tool-arrow">→</span></div>
+          <h3>What a 3D print really costs</h3>
+          <p>Material, machine time, power, consumables, failures and labour — what belongs in the cost, and what does not.</p>
+          <span class="tag">Guide</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="tool-group" style="margin-top:16px">
+      <div class="tool-group-head">
+        <div>
+          <h2>Settings and materials</h2>
+          <p>Why the same model costs different amounts on different profiles.</p>
+        </div>
+        <span class="badge-count">4 guides</span>
+      </div>
+      <div class="tool-grid">
+        <a class="tool-card" href="/guides/infill-vs-strength-and-cost">
+          <div class="tool-card-top"><span class="tool-icon">03</span><span class="tool-arrow">→</span></div>
+          <h3>Infill: strength versus cost</h3>
+          <p>Why 20% to 50% rarely doubles strength but reliably raises material use and print time.</p>
+          <span class="tag">Guide</span>
+        </a>
+        <a class="tool-card" href="/guides/pla-vs-petg-cost">
+          <div class="tool-card-top"><span class="tool-icon">04</span><span class="tool-arrow">→</span></div>
+          <h3>PLA vs PETG, by cost</h3>
+          <p>Price per kilo, waste rate, drying and failure behaviour compared on a per-part basis.</p>
+          <span class="tag">Guide</span>
+        </a>
+        <a class="tool-card" href="/guides/why-failed-prints-must-be-costed">
+          <div class="tool-card-top"><span class="tool-icon">05</span><span class="tool-arrow">→</span></div>
+          <h3>Why failed prints belong in the price</h3>
+          <p>A 10% failure rate is 10% of your filament and 10% of your machine hours. Both are real money.</p>
+          <span class="tag">Guide</span>
+        </a>
+        <a class="tool-card" href="/guides/best-pla-filament">
+          <div class="tool-card-top"><span class="tool-icon">06</span><span class="tool-arrow">→</span></div>
+          <h3>Which PLA is worth buying</h3>
+          <p>Diameter tolerance, fill accuracy and winding &mdash; the things you can measure yourself in ten minutes.</p>
+          <span class="tag">Guide</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="tools-note">
+      <p>Guides link to the calculator they support, so you can check the arithmetic with your own numbers as you read.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-heading">
+      <h2>How to read these guides</h2>
+      <p>Every calculator on this site makes a simplification. The guides are where those simplifications get explained &mdash; read them in order if you are costing prints for the first time, or dip into one when a number on a calculator looks wrong.</p>
+    </div>
+    <div class="prose">
+      <h3>The five lines that decide what a print costs</h3>
+      <p>Almost every costing argument comes down to the same five lines. Four of them are easy to get right once you know where the number should come from, and the fifth is the one people quietly set to zero.</p>
+      <table class="data-table">
+        <tr><th>Line</th><th>What it covers</th><th>Where your number comes from</th><th>What people get wrong</th></tr>
+        <tr><td>Material</td><td>Filament actually consumed, waste included</td><td>Slicer estimate &times; (1 + waste %)</td><td>Dividing by the gross shipping weight of the box</td></tr>
+        <tr><td>Machine time</td><td>Hours the printer is occupied and cannot do anything else</td><td>Slicer time estimate, in hours</td><td>Treating the printer as free because it is already paid for</td></tr>
+        <tr><td>Power</td><td>Kilowatt-hours &times; your electricity tariff</td><td>Printer draw (kW) &times; hours &times; tariff</td><td>Assuming 100 W for an enclosed or heated-chamber machine</td></tr>
+        <tr><td>Failures</td><td>Spools and machine hours lost to prints that did not work</td><td>Your own failure rate over the last month</td><td>Setting it to zero because the last print worked</td></tr>
+        <tr><td>Labour &amp; fees</td><td>Packing, post-processing, platform and payment cuts</td><td>Your hourly rate and the published fee schedule</td><td>Forgetting the processor fee is charged on top of the platform fee</td></tr>
+      </table>
+
+      <h3>The input that is usually wrong</h3>
+      <p>Waste is the line where estimates and reality disagree most often. A well-tuned printer on a familiar material loses somewhere between <strong>8% and 15%</strong> of what the slicer says the model needs &mdash; purge lines, a brim, supports, the tail left on a spool that the extruder cannot reach, and the occasional restart. While you are still dialling in a new filament that figure is easily double.</p>
+      <p>Slicer estimates describe the part. The spool describes everything that got spent getting you the part. If both numbers exist and they disagree, the spool is right.</p>
+
+      <h3>What these guides do not cover</h3>
+      <p>They do not cover design time, sales tax, outbound shipping, packaging cost or marketing. Those belong in a pricing decision, not in a per-part cost, and mixing them together is how a price ends up looking defensible while the job still loses money. They also do not give you market rates: filament prices vary by country, shipping and season, and no figure on this site is a quoted price.</p>
+      <p>Where a number genuinely depends on an outside source &mdash; a supplier, a utility tariff, a marketplace fee schedule &mdash; the page says so and tells you to check the source rather than printing a figure we cannot verify.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

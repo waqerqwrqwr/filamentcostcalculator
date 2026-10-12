@@ -1,0 +1,58 @@
+[
+ {
+  "file": "caliper-steel.jpg",
+  "used_on_site": false
+ },
+ {
+  "file": "caliper.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "filament-boxes.jpg",
+  "used_on_site": false
+ },
+ {
+  "file": "filament-shelf.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "maker-desk.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "parts-drawers.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "printer-orange-part.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "prusa-closeup.jpg",
+  "used_on_site": false
+ },
+ {
+  "file": "spool-black.jpg",
+  "used_on_site": false
+ },
+ {
+  "file": "spool-green.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "spool-on-scale.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "ultimaker-printing.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "workbench-drawers.jpg",
+  "used_on_site": true
+ },
+ {
+  "file": "workshop-row.jpg",
+  "used_on_site": true
+ }
+]

@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spool Remaining Calculator &mdash; How Much Filament Is Left</title>
+<meta name="description" content="Weigh a part-used filament spool and find out how many grams are left, what share of a full reel that is, what it is worth and how many prints it will cover.">
+<link rel="canonical" href="https://filamentcostcalculator.com/spool-remaining-calculator">
+<meta property="og:title" content="Spool Remaining Calculator &mdash; How Much Filament Is Left">
+<meta property="og:description" content="Weigh a part-used filament spool and find out how many grams are left, what share of a full reel that is, what it is worth and how many prints it will cover.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/spool-remaining-calculator">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-spool-remaining.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Calculators",
+   "item": "https://filamentcostcalculator.com/3d-printing-calculators"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Spool Remaining Calculator",
+   "item": "https://filamentcostcalculator.com/spool-remaining-calculator"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Spool Remaining Calculator",
+ "url": "https://filamentcostcalculator.com/spool-remaining-calculator",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in the browser)",
+ "browserRequirements": "Requires JavaScript",
+ "description": "Weigh a part-used filament spool and find out how many grams are left, what share of a full reel that is, what it is worth and how many prints it will cover.",
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "isPartOf": {
+  "@type": "WebSite",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How much filament is left on my spool?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Weigh the whole spool, subtract the weight of an empty spool of the same type, and the difference is the filament. A spool reading 742 g with a 218 g empty spool has 524 g of filament on it, which is about 52% of a 1 kg reel."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does an empty filament spool weigh?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the format. Cardboard-core 1 kg reels are commonly around 150 to 250 g, full plastic-sided 1 kg reels around 200 to 300 g, and small 250 g sample reels around 60 to 120 g. Weigh a spent one from your own brand once &mdash; that is the only number that is right for your stock."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I estimate remaining filament without a scale?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No, not reliably. The slicer's estimate describes the model, not the spool, and there is no gauge on a spool. Scales that read to 1 g are cheap and turn a guess into a measurement you can reuse for every spool of that type."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why subtract a tail I cannot print?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because the last 20 to 40 grams of a spool frequently will not feed. It tangles, snaps or jams near the end, so counting it as usable capacity makes your prints-left figure optimistic. This calculator holds back 30 g for that reason."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/3d-printing-calculators">Calculators</a><span>/</span>Spool Remaining Calculator</p>
+    <h1>Spool Remaining Calculator</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">A spool has no gauge on it. Weigh it, subtract the weight of an empty spool of the same type, and you have the grams left, what that is worth and how many more prints fit.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Weigh the spool</h2>
+            <p>Subtract the empty spool and the rest is filament. Nothing is sent anywhere.</p>
+          </div>
+          <span class="live-badge">Calculates as you type</span>
+        </div>
+        <div class="field-grid"><div class="field">
+            <label for="totalWeight">Spool on the scale</label>
+            <div class="input-wrap"><input id="totalWeight" type="number" min="0" step="1" value="742"><span class="input-unit">g</span></div>
+            <small>Weigh the whole spool, filament included.</small>
+          </div><div class="field">
+            <label for="emptyWeight">Empty spool weight</label>
+            <div class="input-wrap"><input id="emptyWeight" type="number" min="0" step="1" value="218"><span class="input-unit">g</span></div>
+            <small>Weigh a spent spool once and keep the number.</small>
+          </div><div class="field">
+            <label for="netWeight">Filament when full</label>
+            <div class="input-wrap"><input id="netWeight" type="number" min="1" step="1" value="1000"><span class="input-unit">g</span></div>
+            <small>The net weight printed on the spool label.</small>
+          </div><div class="field">
+            <label for="pricePaid">What you paid for it</label>
+            <div class="input-wrap"><input id="pricePaid" type="number" min="0" step="0.01" value="22"><span class="input-unit">USD</span></div>
+            <small>Include shipping for the landed cost.</small>
+          </div><div class="field">
+            <label for="partWeight">Filament per print</label>
+            <div class="input-wrap"><input id="partWeight" type="number" min="0" step="0.1" value="45"><span class="input-unit">g</span></div>
+            <small>Your slicer's material estimate.</small>
+          </div><div class="field">
+            <label for="waste">Waste allowance</label>
+            <div class="input-wrap"><input id="waste" type="number" min="0" step="1" max="80" value="12"><span class="input-unit">%</span></div>
+            <small>Purge, brim, supports, failed starts.</small>
+          </div><div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="&euro;">EUR / &euro;</option>
+                <option value="&pound;">GBP / &pound;</option>
+                <option value="&yen;">CNY / &yen;</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">&#9662;</span>
+            </div>
+            <small>The maths is currency-neutral.</small>
+          </div></div>
+        <div class="calc-actions">
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset to defaults</button>
+          <a class="btn btn-primary" href="/filament-cost-calculator">Cost that filament</a>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+<div class="calc-card result-card">
+        <div class="result-kicker">Filament left on the spool</div>
+        <div class="result-main">
+          <span>After subtracting the empty spool</span>
+          <strong id="left">524 g</strong>
+        </div>
+        <div class="result-sub" id="sub">52% of a full 1000 g spool</div>
+        <div class="result-grid">
+          <div class="metric"><span>Value still on the spool</span><strong id="val">$11.53</strong></div>
+          <div class="metric"><span>Cost per gram</span><strong id="pg">$0.022</strong></div>
+          <div class="metric"><span>Prints left</span><strong id="prints">9</strong></div>
+          <div class="metric"><span>Tail you cannot use</span><strong id="tail">30 g</strong></div>
+        </div>
+        <div class="result-note" id="note">Weighing beats estimating. A part-used spool has no reliable gauge on it.</div>
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#what-this-calculator-works-out">What this calculator works out</a></li>
+        <li><a href="#how-to-weigh-a-part-used-spool">How to weigh a part-used spool</a></li>
+        <li><a href="#empty-spool-weights-vary-more-than-people-expect">Empty spool weights vary more than people expect</a></li>
+        <li><a href="#worked-example-a-part-used-1-kg-spool">Worked example: a part-used 1 kg spool</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="what-this-calculator-works-out">What this calculator works out</h2>
+<p>A spool has no useful gauge on it. The only honest way to know what is left is to put it on a scale and subtract the weight of the empty spool:</p>
+<div class="formula">filament left   = weight on the scale &minus; empty spool weight<br>percent left    = filament left &divide; net weight when full<br>value left      = percent left &times; what you paid<br>usable prints    = (filament left &minus; tail) &divide; (model weight &times; (1 + waste))</div>
+<p>The last line matters more than it looks. The final 20 to 40 grams of a spool usually will not feed &mdash; it tangles, snaps, or jams in the last few metres &mdash; so counting it as usable capacity makes every estimate of remaining prints optimistic.</p>
+
+          <h2 id="how-to-weigh-a-part-used-spool">How to weigh a part-used spool</h2>
+<p>Three steps, about a minute, and you only have to do the second one once per spool type:</p>
+<ol>
+<li>Put the whole spool on a kitchen scale and write down the number. Anything that reads to 1 g is accurate enough &mdash; a 2 g error is 0.09 of a cent on a $22 spool.</li>
+<li>Weigh an empty spool of the same make and size. Do this once, note it on the spool with a marker or in your phone, and reuse it for every spool of that type.</li>
+<li>Subtract. The difference is filament.</li>
+</ol>
+<p>If you have never weighed an empty spool of your brand, do it before you throw the next one away. The number is specific to the manufacturer and the size, and reusing someone else's figure from a forum is how estimates drift.</p>
+
+          <h2 id="empty-spool-weights-vary-more-than-people-expect">Empty spool weights vary more than people expect</h2>
+<p>There is no universal figure. Cardboard cores, full plastic sides, and the wide-spool formats all weigh differently, and a 250 g empty spool on a 1 kg reel is 25% of the delivered weight. That is exactly the error that makes "price divided by 1 kg" wrong.</p>
+<p>The table below is a starting point for what to expect, but make your own measurement the authority. A scale costs less than a spool.</p>
+<table class="data-table">
+  <tr><th>Spool format</th><th>Typical empty weight</th><th>If you assume 0 instead</th></tr>
+  <tr><td>Cardboard core, 1 kg reel</td><td>roughly 150 &ndash; 250 g</td><td>overstates filament left by up to 25%</td></tr>
+  <tr><td>Full plastic sides, 1 kg reel</td><td>roughly 200 &ndash; 300 g</td><td>overstates filament left by up to 30%</td></tr>
+  <tr><td>Small 250 g sample reel</td><td>roughly 60 &ndash; 120 g</td><td>overstates filament left by up to 48%</td></tr>
+</table>
+<p>The percentages in the right-hand column are the argument for weighing an empty one. On a small sample reel, forgetting the spool itself can nearly double your apparent remaining filament.</p>
+
+          <h2 id="worked-example-a-part-used-1-kg-spool">Worked example: a part-used 1 kg spool</h2>
+<p>742 g on the scale, a 218 g empty spool, a 1000 g reel that cost $22, and a 45 g model with a 12% waste allowance:</p>
+<div class="example-list">
+  <div class="example-row"><span>On the scale</span><strong>742 g</strong></div>
+  <div class="example-row"><span>Less the empty spool</span><strong>&minus;218 g</strong></div>
+  <div class="example-row"><span><b>Filament left</b></span><strong>524 g</strong></div>
+  <div class="example-row"><span>As a share of a full reel</span><strong>52%</strong></div>
+  <div class="example-row"><span>Value at the price you paid</span><strong>$11.53</strong></div>
+  <div class="example-row"><span>Effective filament per 45 g print</span><strong>50.4 g</strong></div>
+  <div class="example-row"><span>Prints left, tail excluded</span><strong>9</strong></div>
+</div>
+<p>Nine prints, not ten. The difference is the 30 g tail the calculator holds back &mdash; 494 g of usable filament divided by 50.4 g per print. That is the number to use if you are deciding whether you have enough filament to accept an order tonight.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The empty-spool default of 218 g is a placeholder. Replace it with the weight of a spent spool of your own brand before you trust the result.</p>
+<p>The tail reserve is set at 30 g and is not adjustable on this page. Real tails vary with spool design and how the filament was wound; some spools unwind cleanly to the last metre, and some start tangling 60 g out. Treat the prints-left figure as an estimate that leans slightly conservative &mdash; that is the direction you want an estimate to lean.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How much filament is left on my spool?</summary><p>Weigh the whole spool, subtract the weight of an empty spool of the same type, and the difference is the filament. A spool reading 742 g with a 218 g empty spool has 524 g of filament on it, which is about 52% of a 1 kg reel.</p></details><details><summary>What does an empty filament spool weigh?</summary><p>It depends on the format. Cardboard-core 1 kg reels are commonly around 150 to 250 g, full plastic-sided 1 kg reels around 200 to 300 g, and small 250 g sample reels around 60 to 120 g. Weigh a spent one from your own brand once &mdash; that is the only number that is right for your stock.</p></details><details><summary>Can I estimate remaining filament without a scale?</summary><p>No, not reliably. The slicer's estimate describes the model, not the spool, and there is no gauge on a spool. Scales that read to 1 g are cheap and turn a guess into a measurement you can reuse for every spool of that type.</p></details><details><summary>Why subtract a tail I cannot print?</summary><p>Because the last 20 to 40 grams of a spool frequently will not feed. It tangles, snaps or jams near the end, so counting it as usable capacity makes your prints-left figure optimistic. This calculator holds back 30 g for that reason.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Turn grams into money</h3>
+            <p>Once you know what is left, cost per gram is one division away.</p>
+            <a class="btn btn-dark" href="/filament-cost-calculator">Filament cost calculator</a>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Read next</h3>
+            <ul>
+              <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li>
+            </ul>
+          </div>
+          <p class="note">This page is a calculator, not a quote. Defaults are assumptions &mdash; weigh your own spools.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+<script>
+function el(i){return document.getElementById(i);}
+function num(i){var e=el(i);var v=e?parseFloat(e.value):NaN;return isNaN(v)?null:v;}
+function sym(){var c=el('currency');return c?c.value:'';}
+function money(v,s){v=v||0;var a=Math.abs(v);if(!isFinite(a))return '—';if(a>=1e9)return (v<0?'-':'')+s+a.toExponential(2);var d=(a===0)?2:(a<0.1?3:2);var p=a.toFixed(d).split('.');p[0]=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');return (v<0?'-':'')+s+p.join('.');}
+function set(i,v){var e=el(i);if(e)e.textContent=v;}
+</script><script>
+var F3=['totalWeight','emptyWeight','netWeight','pricePaid','partWeight','waste'];
+var TAIL=30;
+function calculate(){
+  var s=sym(), err=el('err'); err.textContent='';
+  var tot=num('totalWeight'), emp=num('emptyWeight'), net=num('netWeight');
+  var price=num('pricePaid'), part=num('partWeight'), waste=num('waste');
+  if(tot===null||tot<0)tot=0; if(emp===null||emp<0)emp=0;
+  if(net===null||net<=0){err.textContent='Enter the net filament weight from the spool label (usually 1000, 750 or 500).';return;}
+  if(price===null||price<0)price=0; if(part===null||part<0)part=0; if(waste===null||waste<0)waste=0;
+  var left=tot-emp;
+  if(left<0){ err.textContent='The spool weighs less than the empty spool weight you entered. Check both figures.'; left=0; }
+  var pct=left/net*100, val=left/net*price, pg=price/net;
+  var usable=Math.max(0,left-TAIL), eff=part*(1+waste/100);
+  var prints = eff>0 ? Math.floor(usable/eff) : 0;
+  set('left',left.toFixed(0)+' g');
+  set('sub',pct.toFixed(0)+'% of a full '+net+' g spool');
+  set('val',money(val,s)); set('pg',money(pg,s)); set('prints',prints); set('tail',TAIL+' g');
+  var note=el('note');
+  if(pct<10){ note.textContent='Under 10% left. At '+eff.toFixed(1)+' g per print that is about '+prints+' more print(s) before you order — do not start a long job on this spool.'; }
+  else if(pct<25){ note.textContent='Getting low: '+left.toFixed(0)+' g left, about '+prints+' print(s). Worth ordering before your next batch.'; }
+  else { note.textContent='Weighing beats estimating. A part-used spool has no reliable gauge on it.'; }
+}
+function copyResult(){
+  var t='Spool: '+el('left').textContent+' left ('+el('sub').textContent+'), about '+el('prints').textContent+' prints.';
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  var d={totalWeight:742,emptyWeight:218,netWeight:1000,pricePaid:22,partWeight:45,waste:12};
+  for(var k in d){ if(el(k)) el(k).value=d[k]; }
+  if(el('currency')) el('currency').value='$';
+  el('err').textContent=''; calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  F3.forEach(function(i){ if(el(i)) el(i).addEventListener('input',calculate); });
+  el('currency').addEventListener('change',calculate);
+  calculate();
+});
+</script></body>
+</html>

@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Filament Cost Per Gram &mdash; How to Work It Out Properly</title>
+<meta name="description" content="Net weight, shipping weight, spool tails and short-filled reels: how to work out landed cost per gram and compare two spools fairly.">
+<link rel="canonical" href="https://filamentcostcalculator.com/guides/filament-cost-per-gram">
+<meta property="og:title" content="Filament Cost Per Gram &mdash; How to Work It Out Properly">
+<meta property="og:description" content="Net weight, shipping weight, spool tails and short-filled reels: how to work out landed cost per gram and compare two spools fairly.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/guides/filament-cost-per-gram">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-guides.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://filamentcostcalculator.com/guides"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Cost per gram, done properly",
+   "item": "https://filamentcostcalculator.com/guides/filament-cost-per-gram"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "Cost per gram, done properly",
+ "description": "Net weight, shipping weight, spool tails and short-filled reels: how to work out landed cost per gram and compare two spools fairly.",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://filamentcostcalculator.com/guides/filament-cost-per-gram"
+ },
+ "datePublished": "2026-10-12",
+ "dateModified": "2026-10-12",
+ "author": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I calculate cost per gram of filament?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Add shipping and tax to the price you paid, then divide by the net weight on the label. A $22 spool with free shipping and 1000 g of filament is $0.022 per gram. If you paid $6 shipping on a $19 spool, the landed cost is $25 and the real figure is $0.025 per gram."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I use net weight or gross weight?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Net weight &mdash; the filament only, as printed on the label. Gross weight includes the spool, bag, sachet and box, commonly adding 200 to 350 g. Dividing by the parcel weight understates your cost per gram by a fifth or more."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why divide by net weight minus a tail?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because the last 20 to 40 grams on a spool usually will not feed. If you want the cost per gram you will actually experience, exclude the tail. If you want the figure to compare two purchases fairly, the label weight is enough."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it worth buying cheaper filament?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sometimes, but compare landed cost per gram first, and weigh a full spool once to check the fill. A cheaper spool that arrives short and ships expensively is frequently the most expensive option on the page."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides">Guides</a><span>/</span>Cost per gram, done properly</p>
+    <h1>Cost per gram, done properly</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Two spools at the same price are rarely the same cost per gram. This explains what to divide by, what to ignore, and why the cheapest sticker price is often the most expensive spool on the page.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#why-the-sticker-price-is-not-the-number">Why the sticker price is not the number</a></li>
+        <li><a href="#net-weight-versus-gross-weight">Net weight versus gross weight</a></li>
+        <li><a href="#the-tail-you-cannot-print">The tail you cannot print</a></li>
+        <li><a href="#comparing-two-spools-properly">Comparing two spools properly</a></li>
+        <li><a href="#what-to-do-when-the-label-is-wrong">What to do when the label is wrong</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="why-the-sticker-price-is-not-the-number">Why the sticker price is not the number</h2>
+<p>Filament is the only material in a 3D print that you buy by weight and use by weight, which makes comparing it sound trivial. It is not, because four different quantities all get called "the weight of a spool" and only one of them is the one you can print with.</p>
+<p>Cost per gram is the only comparison that survives contact with reality: what you actually paid, divided by the grams that will actually come off the spool. Everything else &mdash; the number on the box, the shipping weight, the advertised capacity &mdash; is a different quantity.</p>
+
+          <h2 id="net-weight-versus-gross-weight">Net weight versus gross weight</h2>
+<p>Every spool sold online quotes a net weight, and that number is what you divide by. The parcel that arrives additionally contains the spool itself, the bag, the silica sachet and the box. A "1 kg" reel commonly arrives as a parcel around 1.2 to 1.35 kg.</p>
+<p>Dividing the price you paid by the parcel weight understates your cost per gram by 20% or more, in the direction that makes you feel good about a purchase you should have questioned.</p>
+<p>Worth knowing: the stated net weight is a target, not a measurement. Reels are filled to a tolerance, and the direction of the error is rarely in your favour. Weighing one full spool of a brand once tells you whether that brand runs long or short, and it is the cheapest audit you will ever run.</p>
+
+          <h2 id="the-tail-you-cannot-print">The tail you cannot print</h2>
+<p>The last stretch of filament on a spool is not usable. It tangles, snaps, or jams in the last few metres, particularly on spools wound loosely or stored badly. Depending on the design, the last 20 to 40 grams are effectively gone.</p>
+<p>That matters most for the question people actually ask: how many prints are left? Counting the tail as capacity gives an answer that is optimistic by one print, which is exactly the print you will start at 11pm before a deadline.</p>
+<p>Two useful habits: add a waste allowance to the model weight rather than pretending your print uses exactly what the slicer says, and hold back 30 grams when you work out what is left on a spool. The <a href="/spool-remaining-calculator">spool remaining calculator</a> does the second automatically.</p>
+
+          <h2 id="comparing-two-spools-properly">Comparing two spools properly</h2>
+<p>The comparison only works if both sides are computed the same way. That means adding shipping and any tax to the price you paid, and dividing by the net weight from the label &mdash; then, if you want the number you will actually experience, dividing by net weight minus the tail.</p>
+<div class="formula">landed cost   = price paid + shipping + tax<br>cost per gram = landed cost &divide; net weight<br>usable cost per gram = landed cost &divide; (net weight &minus; tail)</div>
+<p>Here is the same exercise on three plausible spools, with the arithmetic shown. The figures are illustrative, but the ranking is the point: the cheapest shelf price loses twice.</p>
+<table class="data-table">
+  <tr><th>Spool</th><th class="num">Price</th><th class="num">Shipping</th><th class="num">Net weight</th><th class="num">Landed</th><th class="num">Cost per gram</th></tr>
+  <tr><td>A &mdash; budget, shipped separately</td><td class="num">$19.00</td><td class="num">$6.00</td><td class="num">1000 g</td><td class="num">$25.00</td><td class="num">$0.0250</td></tr>
+  <tr><td>B &mdash; mid price, free shipping</td><td class="num">$22.00</td><td class="num">$0.00</td><td class="num">1000 g</td><td class="num">$22.00</td><td class="num"><b>$0.0220</b></td></tr>
+  <tr><td>C &mdash; cheapest sticker, short-filled</td><td class="num">$18.00</td><td class="num">$8.00</td><td class="num">950 g</td><td class="num">$26.00</td><td class="num">$0.0274</td></tr>
+</table>
+<p>Spool A has the middle sticker price and the worst landed cost of the three once shipping is added. Spool C is the cheapest on the shelf and the most expensive per gram, because it is short-filled and shipped expensively. Only spool B is what it looked like.</p>
+
+          <h2 id="what-to-do-when-the-label-is-wrong">What to do when the label is wrong</h2>
+<p>If a spool arrives noticeably under its stated net weight, weigh a full one from the same brand before you complain &mdash; a single light spool can be an outlier, and a whole order running short is a pattern you can take to the supplier.</p>
+<p>Either way, the operational answer is the same: use the weight you measured, not the weight you were told. A 50 g shortfall on a 1000 g reel is a 5% error in every cost calculation you run from that spool, which is larger than the electricity line on most prints.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>Every figure on this page is arithmetic applied to numbers you supply. This site does not publish brand averages, because filament prices move with shipping, season and exchange rate, and an average that was true when it was written is a wrong number presented as a fact.</p>
+<p>The tail reserve of 20 to 40 g is a range rather than a constant, because it depends on the spool and how the filament was wound. Treat the upper end as the safe assumption when you are deciding whether to accept an order.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>How do I calculate cost per gram of filament?</summary><p>Add shipping and tax to the price you paid, then divide by the net weight on the label. A $22 spool with free shipping and 1000 g of filament is $0.022 per gram. If you paid $6 shipping on a $19 spool, the landed cost is $25 and the real figure is $0.025 per gram.</p></details><details><summary>Should I use net weight or gross weight?</summary><p>Net weight &mdash; the filament only, as printed on the label. Gross weight includes the spool, bag, sachet and box, commonly adding 200 to 350 g. Dividing by the parcel weight understates your cost per gram by a fifth or more.</p></details><details><summary>Why divide by net weight minus a tail?</summary><p>Because the last 20 to 40 grams on a spool usually will not feed. If you want the cost per gram you will actually experience, exclude the tail. If you want the figure to compare two purchases fairly, the label weight is enough.</p></details><details><summary>Is it worth buying cheaper filament?</summary><p>Sometimes, but compare landed cost per gram first, and weigh a full spool once to check the fill. A cheaper spool that arrives short and ships expensively is frequently the most expensive option on the page.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Cost your filament</h3>
+            <p>Turn cost per gram into a cost per part in about twenty seconds.</p>
+            <a class="btn btn-dark" href="/filament-cost-calculator">Cost your filament</a>
+          </div>
+          <div class="side-card">
+            <h3>More guides</h3>
+            <ul>
+              <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li><li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li><li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li><li><a href="/guides/infill-vs-strength-and-cost">Infill: strength versus cost</a></li><li><a href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <p class="note">This guide is explanatory, not financial advice. Prices shown are illustrative examples, not market data.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

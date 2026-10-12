@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What a 3D Print Really Costs &mdash; The Six Lines That Matter</title>
+<meta name="description" content="Material, machine time, electricity, failures, labour and packaging: what belongs in a per-part cost, what belongs in overhead, and a worked example.">
+<link rel="canonical" href="https://filamentcostcalculator.com/guides/3d-print-cost-breakdown">
+<meta property="og:title" content="What a 3D Print Really Costs &mdash; The Six Lines That Matter">
+<meta property="og:description" content="Material, machine time, electricity, failures, labour and packaging: what belongs in a per-part cost, what belongs in overhead, and a worked example.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://filamentcostcalculator.com/guides/3d-print-cost-breakdown">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-guides.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://filamentcostcalculator.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Guides",
+   "item": "https://filamentcostcalculator.com/guides"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "What a 3D print really costs",
+   "item": "https://filamentcostcalculator.com/guides/3d-print-cost-breakdown"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Article",
+ "headline": "What a 3D print really costs",
+ "description": "Material, machine time, electricity, failures, labour and packaging: what belongs in a per-part cost, what belongs in overhead, and a worked example.",
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://filamentcostcalculator.com/guides/3d-print-cost-breakdown"
+ },
+ "datePublished": "2026-10-12",
+ "dateModified": "2026-10-12",
+ "author": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What should be included in the cost of a 3D print?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Six things: filament consumed including waste, machine hours at your own rate, electricity in kilowatt-hours, an allowance for failed prints, your hands-on labour, and packaging. On the site's example 45 g print those six come to about $3.84, of which filament is $1.11."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I include my design time in the cost per part?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No, unless you are designing to order for that specific part. Design time does not scale with the number of parts you make, so it belongs in overhead that your margin covers. Folding it into a per-part cost makes a repeatable product look uncompetitive."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is machine time a cost if I already own the printer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because the machine cannot run anything else while it runs this. The hourly rate represents the opportunity you give up, plus wear on nozzles, belts and moving parts. Leaving it out means long, light prints are priced below what they cost you."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I work out overhead per part?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Add up a normal month of costs that do not scale with production &mdash; software, storage, advertising, insurance, your phone &mdash; and divide by the number of parts you sold that month. Compare it with your per-part margin. If overhead per part is bigger, the volume or the overhead is the problem."
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="calculator-page">
+  <div class="container">
+    <p class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/guides">Guides</a><span>/</span>What a 3D print really costs</p>
+    <h1>What a 3D print really costs</h1>
+    <p class="hero-sub" style="text-align:left;margin:10px 0 0;max-width:780px">Six lines go into a per-part cost and material is usually the smallest of the three big ones. This is what belongs in the figure, what belongs in overhead instead, and where each number comes from.</p>
+    <div class="byline">
+      <span>Last updated <b>12 October 2026</b></span>
+      <span>Formulas and sources shown on the page</span>
+      <span>No signup &middot; nothing you type is uploaded</span>
+      <span><a href="/contact">Report an error</a></span>
+    </div>
+<div class="content-section">
+      <div class="content-grid">
+        <div class="calc-card info-card">
+          <nav class="toc"><b>On this page</b>
+      <ol>
+        <li><a href="#the-six-lines-and-nothing-else">The six lines and nothing else</a></li>
+        <li><a href="#what-does-not-belong-in-a-per-part-cost">What does not belong in a per-part cost</a></li>
+        <li><a href="#why-machine-time-is-the-line-people-forget">Why machine time is the line people forget</a></li>
+        <li><a href="#a-worked-breakdown">A worked breakdown</a></li>
+        <li><a href="#where-the-rest-of-your-money-actually-goes">Where the rest of your money actually goes</a></li>
+        <li><a href="#important-assumptions">Important assumptions</a></li>
+      </ol></nav>
+          <h2 id="the-six-lines-and-nothing-else">The six lines and nothing else</h2>
+<p>A per-part cost is six lines. Anything that is not one of these six belongs somewhere else, and putting it here is how a costing spreadsheet becomes unreadable and a price becomes indefensible.</p>
+<table class="data-table">
+  <tr><th>Line</th><th>What it covers</th><th>Where your number comes from</th></tr>
+  <tr><td>Filament</td><td>Plastic actually consumed</td><td>Slicer estimate &times; (1 + waste)</td></tr>
+  <tr><td>Machine time</td><td>Hours the printer is occupied</td><td>Slicer time &times; your own hourly rate</td></tr>
+  <tr><td>Electricity</td><td>Kilowatt-hours used</td><td>(watts &divide; 1000) &times; hours &times; tariff</td></tr>
+  <tr><td>Failures</td><td>Material and hours lost to scrapped prints</td><td>Your measured failure rate</td></tr>
+  <tr><td>Labour</td><td>Hands-on time: supports, sanding, packing</td><td>Minutes &times; a rate you would accept</td></tr>
+  <tr><td>Packaging</td><td>Box, bag, tape, insert</td><td>Your own receipts</td></tr>
+</table>
+<p>Material, machine time and electricity are the three big ones. Failures and labour are the two that get skipped. Packaging is small and honest, and skipping it is a rounding error rather than a business decision.</p>
+
+          <h2 id="what-does-not-belong-in-a-per-part-cost">What does not belong in a per-part cost</h2>
+<p>Design time, photography, listing fees, advertising, software subscriptions, storage and your internet connection are all real costs. None of them belong in a per-part figure, because none of them scale with the number of parts you make.</p>
+<p>They belong in a <em>monthly overhead</em> that your margin has to cover. The test is simple: if you made one more part this month, would this cost rise? If yes, it is a per-part line. If no, it is overhead.</p>
+<p>Mixing the two produces two kinds of bad decision. Price including overhead and your high-volume item looks uncompetitive. Price excluding it and a busy month with a thin average margin can still leave you out of pocket.</p>
+
+          <h2 id="why-machine-time-is-the-line-people-forget">Why machine time is the line people forget</h2>
+<p>Filament is tangible and electricity appears on a bill, but machine time is invisible: you already own the printer, and no money changes hands while it runs.</p>
+<p>The correct figure is opportunity cost &mdash; what that machine hour could have earned doing something else. If your order book is full, that is a real number you can look up. If it is empty, a floor of replacement cost divided by expected service hours is defensible.</p>
+<p>The practical consequence is worth stating plainly. A small, tall print can run all night while consuming 12 grams of plastic. Costed from material it looks like a 26-cent part; costed properly with machine hours, electricity, a failure allowance and your time, it lands far higher. Long prints are where the machine-hour rate earns its place in the table.</p>
+
+          <h2 id="a-worked-breakdown">A worked breakdown</h2>
+<p>The same 45 g phone stand used on the <a href="/3d-print-cost-calculator">print cost calculator</a>, at a $22 spool of 1000 g, 12% waste, 4.3 hours, $0.20/h machine rate, 120 W at $0.30/kWh, an 8% failure rate, 6 minutes at $12/h and $0.35 packaging:</p>
+<div class="example-list">
+  <div class="example-row"><span>Filament &mdash; the number most people stop at</span><strong>$1.11</strong></div>
+  <div class="example-row"><span>Machine time, 4.3 h at $0.20</span><strong>$0.86</strong></div>
+  <div class="example-row"><span>Electricity, 0.52 kWh at $0.30</span><strong>$0.15</strong></div>
+  <div class="example-row"><span>Failures, 8% of the $2.12 running cost</span><strong>$0.17</strong></div>
+  <div class="example-row"><span>Labour, 6 minutes at $12/h</span><strong>$1.20</strong></div>
+  <div class="example-row"><span>Packaging</span><strong>$0.35</strong></div>
+  <div class="example-row"><span><b>Total</b></span><strong>$3.84</strong></div>
+</div>
+<p>Material is 29% of the total. That is the number to remember: on a mid-length print, pricing from the spool sticker is pricing from under a third of the cost.</p>
+
+          <h2 id="where-the-rest-of-your-money-actually-goes">Where the rest of your money actually goes</h2>
+<p>Once the per-part cost is right, the remaining question is whether the business works. That is the margin, and the margin has to cover overhead before it becomes your income.</p>
+<p>A rough way to check: take your monthly overhead, divide by the number of parts you actually sell in a month, and compare it with your per-part margin. If overhead per part is larger than margin per part, the honest conclusion is that the volume is too low or the overhead too high &mdash; not that the price is too low, which is the conclusion people normally reach.</p>
+<p>The <a href="/3d-print-pricing-calculator">pricing calculator</a> handles the part of this that has an exact answer: turning a cost into a price after selling fees.</p>
+
+          <h2 id="important-assumptions">Important assumptions</h2>
+<p>The six-line structure assumes you are selling physical parts that you produce one at a time. Batch production, print farms and wholesale change the arithmetic &mdash; not the lines, but how you allocate them.</p>
+<p>The example figures are the calculator's defaults and are illustrative. Your filament price, failure rate and time are the whole point of the exercise; any number you did not measure is a placeholder.</p>
+
+          <div class="faq"><h2>Questions</h2><details><summary>What should be included in the cost of a 3D print?</summary><p>Six things: filament consumed including waste, machine hours at your own rate, electricity in kilowatt-hours, an allowance for failed prints, your hands-on labour, and packaging. On the site's example 45 g print those six come to about $3.84, of which filament is $1.11.</p></details><details><summary>Should I include my design time in the cost per part?</summary><p>No, unless you are designing to order for that specific part. Design time does not scale with the number of parts you make, so it belongs in overhead that your margin covers. Folding it into a per-part cost makes a repeatable product look uncompetitive.</p></details><details><summary>Why is machine time a cost if I already own the printer?</summary><p>Because the machine cannot run anything else while it runs this. The hourly rate represents the opportunity you give up, plus wear on nozzles, belts and moving parts. Leaving it out means long, light prints are priced below what they cost you.</p></details><details><summary>How do I work out overhead per part?</summary><p>Add up a normal month of costs that do not scale with production &mdash; software, storage, advertising, insurance, your phone &mdash; and divide by the number of parts you sold that month. Compare it with your per-part margin. If overhead per part is bigger, the volume or the overhead is the problem.</p></details></div>
+        </div>
+        <aside class="side-col">
+          <div class="pro-cta">
+            <h3>Cost the whole print</h3>
+            <p>Six lines, your own numbers, a cost per part you can break down.</p>
+            <a class="btn btn-dark" href="/3d-print-cost-calculator">Cost the whole print</a>
+          </div>
+          <div class="side-card">
+            <h3>More guides</h3>
+            <ul>
+              <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li><li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li><li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li><li><a href="/guides/infill-vs-strength-and-cost">Infill: strength versus cost</a></li><li><a href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+            </ul>
+          </div>
+          <div class="side-card">
+            <h3>Related calculators</h3>
+            <ul>
+              <li><a href="/filament-cost-calculator">Filament cost</a></li>
+              <li><a href="/3d-print-cost-calculator">3D print cost</a></li>
+              <li><a href="/print-time-cost-calculator">Print time &amp; power</a></li>
+              <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+              <li><a href="/infill-cost-calculator">Infill cost</a></li>
+              <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+            </ul>
+          </div>
+          <p class="note">This guide is explanatory, not financial advice. Figures shown are the calculators' example defaults, not measured averages.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. &copy; 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var el=document.getElementById('q'); if(!el) return;
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a, .side-card a'));
+  el.addEventListener('keydown',function(e){
+    if(e.key!=='Enter') return;
+    var q=el.value.trim().toLowerCase(); if(!q) return;
+    var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+    window.location.href=hit?hit.getAttribute('href'):'/3d-printing-calculators';
+  });
+});
+</script>
+</body>
+</html>

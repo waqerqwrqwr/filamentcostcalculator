@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Filament Cost Calculator — 3D Printing Cost Calculators</title>
+<meta name="description" content="Six free 3D printing cost calculators for filament, machine time, power and pricing. Every formula is shown and nothing you type leaves your browser.">
+<link rel="canonical" href="https://filamentcostcalculator.com/">
+<meta property="og:title" content="Filament Cost Calculator — 3D Printing Cost Calculators">
+<meta property="og:description" content="Work out what a 3D print really costs: filament, machine time, power and failure rate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://filamentcostcalculator.com/">
+<meta property="og:image" content="https://filamentcostcalculator.com/assets/og-cover.jpg">
+<meta name="robots" content="index,follow">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "Filament Cost Calculator",
+ "url": "https://filamentcostcalculator.com/",
+ "description": "Free 3D printing cost calculators for filament, machine time, power and pricing.",
+ "publisher": {
+  "@type": "Organization",
+  "name": "Filament Cost Calculator",
+  "url": "https://filamentcostcalculator.com/"
+ }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="/"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+    <div class="site-search">
+      <input type="search" id="q" placeholder="Search calculators and guides" aria-label="Search calculators and guides" autocomplete="off">
+    </div>
+    <nav class="nav">
+      <details class="nav-dd">
+        <summary>Calculators</summary>
+        <div class="nav-dd-panel">
+          <a href="/filament-cost-calculator">Filament cost</a>
+          <a href="/3d-print-cost-calculator">Print cost</a>
+          <a href="/print-time-cost-calculator">Time &amp; power</a>
+          <a href="/spool-remaining-calculator">Spool remaining</a>
+          <a href="/infill-cost-calculator">Infill cost</a>
+          <a href="/3d-print-pricing-calculator">Pricing</a>
+        </div>
+      </details>
+      <a href="/guides">Guides</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container">
+    <h1>What does that 3D print actually cost you?</h1>
+    <p class="hero-sub">Six free calculators for filament, machine time, power and pricing. Every formula is printed on the page, and <b>nothing you type leaves your browser</b>.</p>
+    <div class="hero-search">
+      <input type="search" placeholder="Try: cost per gram, spool weight, power…" aria-label="Search" autocomplete="off">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calc">
+  <div class="container">
+    <div class="calc-shell">
+      <div class="calc-card input-card">
+        <div class="input-head">
+          <div>
+            <h2>Filament cost calculator</h2>
+            <p>Enter the numbers from your own receipt and slicer.</p>
+          </div>
+          <span class="live-badge">Calculates as you type</span>
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <label for="spoolPrice">Price paid for the spool</label>
+            <div class="input-wrap"><input id="spoolPrice" type="number" min="0" step="0.01" value="22"><span class="input-unit">USD</span></div>
+            <small>Include tax and shipping for the true landed cost.</small>
+          </div>
+          <div class="field">
+            <label for="netWeight">Filament on the spool</label>
+            <div class="input-wrap"><input id="netWeight" type="number" min="1" step="1" value="1000"><span class="input-unit">g</span></div>
+            <small>Net weight, not the shipping weight of the box.</small>
+          </div>
+          <div class="field">
+            <label for="partWeight">Filament used per print</label>
+            <div class="input-wrap"><input id="partWeight" type="number" min="0" step="0.1" value="45"><span class="input-unit">g</span></div>
+            <small>Your slicer's material estimate.</small>
+          </div>
+          <div class="field">
+            <label for="waste">Waste allowance</label>
+            <div class="input-wrap"><input id="waste" type="number" min="0" max="80" step="1" value="12"><span class="input-unit">%</span></div>
+            <small>Purge, brim, supports, failed starts.</small>
+          </div>
+          <div class="field">
+            <label for="qty">How many prints</label>
+            <div class="input-wrap"><input id="qty" type="number" min="1" step="1" value="1"><span class="input-unit">pcs</span></div>
+            <small>For batch runs and small orders.</small>
+          </div>
+          <div class="field">
+            <label for="currency">Currency label</label>
+            <div class="input-wrap">
+              <select id="currency">
+                <option value="$">USD / $</option>
+                <option value="€">EUR / €</option>
+                <option value="£">GBP / £</option>
+                <option value="¥">CNY / ¥</option>
+                <option value="">none</option>
+              </select>
+              <span class="input-unit">▾</span>
+            </div>
+            <small>The maths is currency-neutral.</small>
+          </div>
+        </div>
+        <div class="calc-actions">
+          <button class="btn btn-secondary" type="button" onclick="resetAll()">Reset to defaults</button>
+          <a class="btn btn-primary" href="/filament-cost-calculator">Full page, formulas and examples</a>
+        </div>
+        <div class="err" id="err" role="alert"></div>
+      </div>
+
+      <div class="calc-card result-card">
+        <div class="result-kicker">Cost per print</div>
+        <div class="result-main">
+          <span>Filament only, waste included</span>
+          <strong id="perPart">$1.11</strong>
+        </div>
+        <div class="result-sub" id="perPartSub">45 g model, 50.4 g with waste</div>
+        <div class="result-grid">
+          <div class="metric"><span>Cost per gram</span><strong id="perGram">$0.022</strong></div>
+          <div class="metric"><span>Cost per kilogram</span><strong id="perKg">$22.00</strong></div>
+          <div class="metric"><span>Prints left on spool</span><strong id="perSpool">19</strong></div>
+          <div class="metric"><span>Total for batch</span><strong id="batch">$1.11</strong></div>
+        </div>
+        <div class="result-note" id="note">Material cost only. Machine time, power, packaging and selling fees are separate.</div>
+        <div class="result-actions">
+          <button type="button" onclick="copyResult()">Copy result</button>
+          <button type="button" onclick="resetAll()">Reset</button>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:14px">The defaults above are the calculator's own example values — a $22 spool of 1000 g, a 45 g model and a 12% waste rate. Replace every one of them with your own figures. Figures from the defaults, not market data.</p>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-heading">
+      <h2>All calculators</h2>
+      <p>Six tools, grouped by the question you are trying to answer. Start with filament cost — it is the number every other calculator builds on.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="/filament-cost-calculator">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="2.6"/><path d="M12 3.8v3.6M12 16.6v3.6M3.8 12h3.6M16.6 12h3.6"/></svg>
+        <b>Filament Cost Calculator</b><small>Cost per part, per gram, per spool</small>
+      </a>
+      <a class="tile" href="/3d-print-cost-calculator">
+        <svg viewBox="0 0 24 24"><path d="M6 3.2h12v17.6l-3-1.9-3 1.9-3-1.9-3 1.9z"/><path d="M9.2 8.2h5.6M9.2 12h5.6M9.2 15.6h3.2"/></svg>
+        <b>3D Print Cost Calculator</b><small>Material, time, power, failures</small>
+      </a>
+      <a class="tile" href="/print-time-cost-calculator">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.2V12l3.1 1.9"/></svg>
+        <b>Print Time &amp; Power</b><small>What the hours and kWh add</small>
+      </a>
+      <a class="tile" href="/spool-remaining-calculator">
+        <svg viewBox="0 0 24 24"><path d="M4.5 15.4h15l-1.4 4.2H5.9z"/><path d="M8.2 15.4V6.6a2 2 0 0 1 2-2h3.6a2 2 0 0 1 2 2v8.8"/><path d="M10.6 12.2h2.8"/></svg>
+        <b>Spool Remaining</b><small>Grams left on a part spool</small>
+      </a>
+      <a class="tile" href="/infill-cost-calculator">
+        <svg viewBox="0 0 24 24"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="1.6"/><path d="M3.6 9.2h16.8M3.6 14.8h16.8M9.2 3.6v16.8M14.8 3.6v16.8"/></svg>
+        <b>Infill Cost</b><small>Infill % and perimeters</small>
+      </a>
+      <a class="tile" href="/3d-print-pricing-calculator">
+        <svg viewBox="0 0 24 24"><path d="M20.4 12.4 12.4 20.4 3.6 11.6V3.6h8z"/><circle cx="8.1" cy="8.1" r="1.4"/></svg>
+        <b>Pricing Calculator</b><small>Cost to retail price</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2>How these calculators are built</h2>
+      <p>Four rules that decide what is on every page. They are the reason the numbers here can be checked instead of trusted.</p>
+    </div>
+    <div class="feature-cols">
+      <div class="feature">
+        <h3>The formula is printed on the page</h3>
+        <p>Each calculator shows the arithmetic it uses, in plain text, directly above the result. If a figure looks wrong you can work out why without filing a support ticket.</p>
+      </div>
+      <div class="feature">
+        <h3>Defaults are labelled as assumptions</h3>
+        <p>A $22 spool and a 12% waste rate are plausible starting examples, not market averages we claim to have measured. Filament prices, tariffs and platform fees move, so anything you did not type yourself is an example.</p>
+      </div>
+      <div class="feature">
+        <h3>Nothing is uploaded</h3>
+        <p>The arithmetic runs in your browser. There is no account, no server round trip and no analytics on the input fields. You can open a calculator, disconnect from the network and still use it.</p>
+      </div>
+      <div class="feature">
+        <h3>Sources instead of invented numbers</h3>
+        <p>Where a figure depends on a supplier, a utility tariff or a marketplace fee, the page says so and points you at the official source rather than guessing a number and presenting it as fact.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <figure>
+        <img src="/assets/spool-on-scale.jpg" alt="A part-used spool of filament sitting on a digital kitchen scale" width="1280" height="719">
+        <figcaption>A part-used spool on a kitchen scale. Weigh it, subtract the empty spool, and you have your real cost per gram — not the sticker price divided by an assumed number of prints.
+        
+        <span class="credit">Photo: Creative Tools, Wikimedia Commons, CC BY 2.0</span></figcaption>
+      </figure>
+      <figure>
+        <img src="/assets/caliper.jpg" alt="A vernier caliper measuring a part against a white background" width="1280" height="960">
+        <figcaption>Calipers and a scale will improve your costing more than any spreadsheet formula. Wall thickness and part weight are the two inputs people guess wrong most often.
+        
+        <span class="credit">Photo: Simon A. Eugster, Wikimedia Commons, CC BY-SA 4.0</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-heading">
+      <h2>Popular calculators</h2>
+      <p>The three groups people ask for most, and the guides that explain the assumptions behind them.</p>
+    </div>
+    <div class="cat-cards">
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="12" cy="12" r="2.6"/></svg>
+          <h3>Material cost</h3>
+        </div>
+        <ul class="cat-list">
+          <li><a href="/filament-cost-calculator">Filament Cost Calculator</a></li>
+          <li><a href="/spool-remaining-calculator">Spool Remaining Calculator</a></li>
+          <li><a href="/infill-cost-calculator">Infill Cost Calculator</a></li>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li>
+        </ul>
+        <a class="cat-more" href="/3d-printing-calculators">See all calculators</a>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.2V12l3.1 1.9"/></svg>
+          <h3>Machine time &amp; power</h3>
+        </div>
+        <ul class="cat-list">
+          <li><a href="/3d-print-cost-calculator">3D Print Cost Calculator</a></li>
+          <li><a href="/print-time-cost-calculator">Print Time &amp; Power Calculator</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li>
+        </ul>
+        <a class="cat-more" href="/guides">Read the guides</a>
+      </div>
+      <div class="cat-card">
+        <div class="cat-card-head">
+          <svg viewBox="0 0 24 24"><path d="M20.4 12.4 12.4 20.4 3.6 11.6V3.6h8z"/><circle cx="8.1" cy="8.1" r="1.4"/></svg>
+          <h3>Selling &amp; pricing</h3>
+        </div>
+        <ul class="cat-list">
+          <li><a href="/3d-print-pricing-calculator">3D Print Pricing Calculator</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li>
+          <li><a href="/guides/infill-vs-strength-and-cost">Infill: strength versus cost</a></li>
+          <li><a href="/guides/best-pla-filament">Which PLA is worth buying</a></li>
+        </ul>
+        <a class="cat-more" href="/3d-printing-calculators">Compare the tools</a>
+      </div>
+    </div>
+
+    <div class="related">
+      <h2>Latest guides</h2>
+      <ul>
+        <li><a href="/guides/filament-cost-per-gram">Cost per gram, done properly</a></li>
+        <li><a href="/guides/3d-print-cost-breakdown">What a 3D print really costs</a></li>
+        <li><a href="/guides/why-failed-prints-must-be-costed">Why failed prints must be costed</a></li>
+        <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG, by cost</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <h2>What these calculators are not</h2>
+      <p>They are arithmetic with editable inputs, not a market price list. Every default is a starting assumption you are expected to overwrite with your own receipt, your own electricity tariff and your own slicer estimate. Treat any figure you did not enter yourself as an example.</p>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/filament-cost-calculator">Open the filament calculator</a>
+      <a class="btn btn-secondary" href="/about">How this site is maintained</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-cols">
+      <div class="footer-about">
+        <a class="brand" href="/" style="margin-bottom:10px"><span class="brand-mark">3D</span>Filament Cost Calculator</a>
+        <p>Free calculators for people who print things and sell them. Every formula is shown, every default is labelled an assumption, and nothing you type is uploaded.</p>
+        <p class="note">Last updated 12 October 2026.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/filament-cost-calculator">Filament cost</a></li>
+          <li><a href="/3d-print-cost-calculator">Print cost</a></li>
+          <li><a href="/print-time-cost-calculator">Time &amp; power</a></li>
+          <li><a href="/spool-remaining-calculator">Spool remaining</a></li>
+          <li><a href="/infill-cost-calculator">Infill cost</a></li>
+          <li><a href="/3d-print-pricing-calculator">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guides</h4>
+        <ul>
+          <li><a href="/guides/filament-cost-per-gram">Cost per gram</a></li>
+          <li><a href="/guides/3d-print-cost-breakdown">What a print costs</a></li>
+          <li><a href="/guides/why-failed-prints-must-be-costed">Failed prints</a></li>
+          <li><a href="/guides/pla-vs-petg-cost">PLA vs PETG</a></li>
+          <li><a href="/guides">All guides</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container disclosure">As an Amazon Associate and affiliate partner we may earn from qualifying purchases. Prices and fees shown are examples, not offers. Always verify against your own supplier and platform fee pages. © 2026 Filament Cost Calculator.</div>
+</footer>
+
+<script>
+function num(id){var v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v;}
+function sym(){return document.getElementById('currency').value;}
+function money(v,s){return s + v.toFixed(v<1?3:2);}
+function calculate(){
+  var err=document.getElementById('err'), note=document.getElementById('note');
+  err.textContent=''; note.className='result-note';
+  var p=num('spoolPrice'), w=num('netWeight'), part=num('partWeight'), waste=num('waste'), qty=num('qty');
+  if(p===null||p<0){err.textContent='Enter a spool price of 0 or more.';return;}
+  if(w===null||w<=0){err.textContent='Enter the net filament weight in grams (for example 1000).';return;}
+  if(part===null||part<0){err.textContent='Enter the filament used per print in grams.';return;}
+  if(waste===null||waste<0){waste=0;}
+  if(qty===null||qty<1){qty=1;document.getElementById('qty').value=1;}
+  var s=sym(), perGram=p/w, eff=part*(1+waste/100), perPart=eff*perGram;
+  document.getElementById('perPart').textContent=money(perPart,s);
+  document.getElementById('perPartSub').textContent=part+' g model, '+eff.toFixed(1)+' g with waste';
+  document.getElementById('perGram').textContent=money(perGram,s);
+  document.getElementById('perKg').textContent=money(perGram*1000,s);
+  var sp=Math.floor(w/eff);
+  document.getElementById('perSpool').textContent=sp;
+  document.getElementById('batch').textContent=money(perPart*qty,s);
+  if(part>w){
+    note.textContent='Careful: one print uses more filament than the whole spool. Check the model weight and the spool weight.';
+  } else if(sp<3){
+    note.textContent='Only about '+sp+' print(s) fit on this spool. Order more before you take batch work on.';
+  } else {
+    note.textContent='Material cost only. Machine time, power, packaging and selling fees are additional.';
+  }
+}
+function copyResult(){
+  var t='Filament cost: '+document.getElementById('perPart').textContent+' per print ('+document.getElementById('perGram').textContent+'/g)';
+  if(navigator.clipboard){navigator.clipboard.writeText(t);}
+}
+function resetAll(){
+  document.getElementById('spoolPrice').value=22;
+  document.getElementById('netWeight').value=1000;
+  document.getElementById('partWeight').value=45;
+  document.getElementById('waste').value=12;
+  document.getElementById('qty').value=1;
+  document.getElementById('currency').value='$';
+  document.getElementById('err').textContent='';
+  calculate();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  ['spoolPrice','netWeight','partWeight','waste','qty'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',calculate);
+  });
+  document.getElementById('currency').addEventListener('change',calculate);
+  calculate();
+
+  /* header + hero search: jump to the best matching link on the page */
+  var links=[].slice.call(document.querySelectorAll('.tiles a, .cat-list a, .related a, .nav-dd-panel a'));
+  function wireSearch(el){
+    if(!el) return;
+    el.addEventListener('keydown',function(e){
+      if(e.key!=='Enter') return;
+      var q=el.value.trim().toLowerCase(); if(!q) return;
+      var hit=links.find(function(a){return a.textContent.toLowerCase().indexOf(q)>-1;});
+      if(hit) window.location.href=hit.getAttribute('href');
+      else window.location.href='/3d-printing-calculators';
+    });
+  }
+  wireSearch(document.getElementById('q'));
+  wireSearch(document.querySelector('.hero-search input'));
+});
+</script>
+</body>
+</html>
