@@ -1,0 +1,5 @@
+# Wrangler / npm local artifacts. None of these belong in the repository, and
+# none of them belong in the deployed asset set (see .assetsignore).
+node_modules/
+.wrangler/
+tmp/

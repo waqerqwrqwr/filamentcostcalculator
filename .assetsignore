@@ -1,8 +1,16 @@
 # Files in this repository that must NOT be uploaded as public site content.
 # Same format as .gitignore. The assets directory is the repository root, so
 # without this file the repo's own housekeeping would be served publicly.
+#
+# Verified with `wrangler dev` - all three patterns below return 404.
 .git/
 .gitignore
 .assetsignore
 README.md
 wrangler.jsonc
+
+# Wrangler / npm artifacts (appear if anyone runs `npx wrangler dev` in this
+# folder; node_modules alone is thousands of files that must never be served).
+node_modules/
+.wrangler/
+tmp/
