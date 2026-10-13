@@ -1,6 +1,6 @@
-# filamentcostcalculator.com
+# 3dfilamentcost.com
 
-Source for **[filamentcostcalculator.com](https://filamentcostcalculator.com)** — free calculators for people who print things and then sell them. Every formula is shown on the page, and every default value is labelled as an assumption rather than a fact.
+Source for **[3dfilamentcost.com](https://3dfilamentcost.com)** — free calculators for people who print things and then sell them. Every formula is shown on the page, and every default value is labelled as an assumption rather than a fact.
 
 ## Pages
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://filamentcostcalculator.com/sitemap.xml
+Sitemap: https://3dfilamentcost.com/sitemap.xml
