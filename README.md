@@ -19,9 +19,20 @@ Source for **[3dfilamentcost.com](https://3dfilamentcost.com)** — free calcula
 
 ## Hosting
 
-Served as a static site from Cloudflare Pages. There is no build step: the files in this repository are exactly what is served.
+Served as static assets from **Cloudflare Workers**; `wrangler.jsonc` declares the
+repository root as the assets directory. There is no build step — the files in this
+repository are exactly what is served.
 
-Internal links, `rel=canonical` and `sitemap.xml` all use **extensionless URLs** (`/about`, not `/about.html`). Cloudflare Pages redirects `about.html` to `about`, so the extensionless form is the canonical one — keep it that way when adding pages.
+Hostname: `3dfilamentcost.com`.
+
+Two URL rules that the whole site depends on, so please keep them when adding pages:
+
+- **File pages drop the extension.** `about.html` is served at `/about`, and
+  `/about.html` 307-redirects to `/about`. Internal links, `rel=canonical` and
+  `sitemap.xml` therefore all use the extensionless form.
+- **Directory indexes keep the trailing slash.** `guides/index.html` is served at
+  `/guides/`, and `/guides` 307-redirects to `/guides/`. Link to `/guides/`, never
+  to bare `/guides`, or the canonical points at a redirect.
 
 ## Adding a page
 

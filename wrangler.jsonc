@@ -1,0 +1,21 @@
+{
+  // Cloudflare Workers static-assets configuration.
+  //
+  // Without this file `npx wrangler deploy` fails with
+  // "Missing entry-point to Worker script or to assets directory", which is
+  // why the Workers Builds pipeline produced no deployment.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "filamentcostcalculator",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    // The site files live at the repository root (index.html at the top level).
+    "directory": ".",
+    // Serve our own illustrated 404.html with a real 404 status code instead of
+    // Cloudflare's blank default. html_handling is left at its default
+    // ("auto-trailing-slash"), which is what gives us:
+    //   /about  -> 200 (served from about.html)
+    //   /about.html -> 307 -> /about
+    //   /guides -> 307 -> /guides/  (directory indexes keep the trailing slash)
+    "not_found_handling": "404-page"
+  }
+}

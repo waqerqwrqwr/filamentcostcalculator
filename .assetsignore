@@ -1,0 +1,8 @@
+# Files in this repository that must NOT be uploaded as public site content.
+# Same format as .gitignore. The assets directory is the repository root, so
+# without this file the repo's own housekeeping would be served publicly.
+.git/
+.gitignore
+.assetsignore
+README.md
+wrangler.jsonc
